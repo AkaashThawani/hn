@@ -1,0 +1,13 @@
+<div fxLayout="column nowrap" fxLayoutAlign="start stretch" fxLayoutGap="10px" class="page">
+    <div class="story" *ngFor="let story of paginatedData;index as i">
+        <span class="story-title">{{story.index}}. {{paginated[i]?.title}}</span>
+        <a class="story-url" target="_blank" href="{{paginated[i]?.url}}">({{paginated[i]?.url}})</a>
+        <div class="story-info">{{paginated[i]?.score}} points by <a routerLink="./user/{{paginated[i]?.by}}">{{paginated[i]?.by}} </a>
+            <a> {{getTime(paginated[i]?.time)}} </a> |
+            <a routerLink="./story/{{paginated[i]?.id}}"> {{paginated[i]?.descendants}} comments </a>
+        </div>
+    </div>
+    <mat-paginator paginator [length]="100" [pageSize]="20" (page)="onPageChange($event)" showFirstLastButtons="true"
+        aria-label="Select page">
+    </mat-paginator>
+</div>

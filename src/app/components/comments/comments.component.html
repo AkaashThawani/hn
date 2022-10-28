@@ -1,0 +1,15 @@
+<div class="comment" *ngFor="let kidData of data;index as i">
+    <div *ngIf="!kidData.deleted">
+        <span class="comment-info">
+            <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon>
+            <a>{{kidData?.by +' '}}</a> <a>{{ getTime(kidData?.time)}}</a> | next
+        </span>
+        <div class="comment-body">
+            <div class="comment-text" [innerHTML]="kidData?.text"></div>
+            <div class="comment-reply">reply</div>
+        </div>
+    </div>
+    <div *ngIf="kidData?.kidsData" style="margin-left: 30px;">
+        <app-comments [data]="kidData.kidsData"></app-comments>
+    </div>
+</div>
