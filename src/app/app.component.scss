@@ -129,3 +129,18 @@
     box-shadow:  none;
     background-color: inherit;
 }
+
+@media screen and (max-width:900px){
+    .content{
+        margin: 0px;
+    }
+}
+
+.text-center{
+    text-align: center;
+}
+
+.minimize:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}

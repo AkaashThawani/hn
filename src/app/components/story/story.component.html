@@ -1,7 +1,7 @@
 <div class="page">
     <div class="story">
         <span class="story-title">{{storyData?.title}}</span>
-        <a class="story-url" target="_blank" href="{{storyData?.url}}">({{storyData?.url}})</a>
+        <a class="story-url" target="_blank" href="{{storyData?.url}}">{{storyData?.url}}</a>
         <div class="story-info">{{storyData.score}} points by <a routerLink="/user/{{storyData?.by}}">{{storyData?.by}} </a>
             <a> {{getTime(storyData.time)}} </a> |
             <a routerLink="/story/{{storyData.id}}"> {{storyData?.descendants}} comments </a>

@@ -52,10 +52,10 @@ export class StoryComponent implements OnInit {
           temp.push(kidsData)
         })
       });
-      console.log("FINALLY" ,this.kidsArrayData)
+      // console.log("FINALLY" ,this.kidsArrayData)
       return {...commentData,'kidsData':temp}
     }else{
-      console.log("FINALLY" ,this.kidsArrayData)
+      // console.log("FINALLY" ,this.kidsArrayData)
       return commentData
     }
   }
