@@ -1,8 +1,9 @@
-<div class="comment" *ngFor="let kidData of data;index as i">
+<!-- <div class="comment" *ngFor="let kidData of data;index as i">
     <div *ngIf="!kidData.deleted">
         <span class="comment-info">
             <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon>
-            <a>{{kidData?.by +' '}}</a> <a>{{ getTime(kidData?.time)}}</a> | next
+            <a routerLink="/user/{{kidData.by}}">{{kidData?.by +' '}}</a> <a>{{ getTime(kidData?.time)}}</a> |
+            next
         </span>
         <div class="comment-body">
             <div class="comment-text" [innerHTML]="kidData?.text"></div>
@@ -11,5 +12,37 @@
     </div>
     <div *ngIf="kidData?.kidsData" style="margin-left: 30px;">
         <app-comments [data]="kidData.kidsData"></app-comments>
+    </div>
+</div> -->
+<mat-accordion *ngFor="let kidData of data;index as i">
+    <mat-expansion-panel hideToggle expanded="true">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <span class="comment-info">
+                    <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon>
+                    <a routerLink="/user/{{kidData.by}}">{{kidData?.by +' '}}</a> <a>{{ getTime(kidData?.time)}}</a> |
+                    next
+                </span>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="comment-body">
+            <div class="comment-text" [innerHTML]="kidData?.text"></div>
+            <div class="comment-reply">reply</div>
+        </div>
+        <div *ngIf="kidData?.kidsData" style="margin-left: 30px;">
+            <app-comments [data]="kidData.kidsData"></app-comments>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
+<div *ngIf="data.length==0">
+    <div class="skeleton skeleton-text"></div>
+    <div class="skeleton skeleton-text"></div>
+    <div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text"></div>
+    </div>
+    <div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text"></div>
     </div>
 </div>

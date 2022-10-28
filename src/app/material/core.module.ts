@@ -69,8 +69,8 @@ import { NgModule } from '@angular/core';
         MatSnackBarModule,
         MatTableModule,
         MatSortModule,
-        MatPaginatorModule
-
+        MatPaginatorModule,
+        MatMenuModule,
     ],
     exports: [
         MatButtonModule,
@@ -78,8 +78,11 @@ import { NgModule } from '@angular/core';
         MatIconModule,
         MatSidenavModule,
         MatBadgeModule,
+        MatCardModule,
         MatListModule,
+        MatMenuModule,
         MatGridListModule,
+        MatExpansionModule,
         MatInputModule,
         MatFormFieldModule,
         MatSelectModule,

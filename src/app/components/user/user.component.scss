@@ -17,4 +17,13 @@
         width: 6%;
         font-weight: 300;
     }
+    .extras{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 2px;
+        text-decoration: underline;
+        cursor: pointer;
+    }
 }

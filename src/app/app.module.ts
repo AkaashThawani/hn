@@ -13,6 +13,9 @@ import { StoryComponent } from './components/story/story.component';
 import { HeadingComponent } from './components/heading/heading.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { UserComponent } from './components/user/user.component';
+import { CommentsHistoryComponent } from './components/comments-history/comments-history.component';
+import { SubmissionHistoryComponent } from './components/submission-history/submission-history.component';
+import { FavoritesHistoryComponent } from './components/favorites-history/favorites-history.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { UserComponent } from './components/user/user.component';
     HeadingComponent,
     CommentsComponent,
     UserComponent,
+    CommentsHistoryComponent,
+    SubmissionHistoryComponent,
+    FavoritesHistoryComponent,
   ],
   imports: [
     BrowserModule,
