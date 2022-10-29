@@ -14,16 +14,20 @@
         <app-comments [data]="kidData.kidsData"></app-comments>
     </div>
 </div> -->
-<mat-accordion accordion *ngFor="let kidData of data;index as i">
-    <mat-expansion-panel hideToggle expanded="true" disabled="true" #mep="matExpansionPanel"  *ngIf="!kidData.deleted">
+<mat-accordion accordion *ngFor="let kidData of data;index as i;last as last">
+    <mat-expansion-panel hideToggle expanded="true" disabled="true" #mep="matExpansionPanel" class="comment" *ngIf="!kidData.deleted">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 <span class="comment-info" [id]="kidData.id">
                     <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon>
                     <a routerLink="/user/{{kidData.by}}">{{kidData?.by +' '}}</a> 
                     <a>{{ getTime(kidData?.time)}} | </a>
-                    <span (click)="scrollToNext(data,i)">next</span> 
-                    <span (click)="mep.expanded=!mep.expanded" class="minimize"> [ - ] </span>
+                    <span (click)="scrollToNext(data,i)" class="next" *ngIf="!last">next</span>
+                    <span>
+                        <span *ngIf="mep.expanded==true" (click)="mep.expanded=!mep.expanded" class="minimize"> [ - ] </span>
+                        <span *ngIf="mep.expanded==false" (click)="mep.expanded=!mep.expanded" class="minimize">[ {{kidData?.kids?.length || 1}} more ]</span>
+                    </span> 
+                    
                 </span>
             </mat-panel-title>
         </mat-expansion-panel-header>
@@ -31,7 +35,7 @@
             <div class="comment-text" [innerHTML]="kidData?.text"></div>
             <div class="comment-reply">reply</div>
         </div>
-        <div *ngIf="kidData?.kidsData" style="margin-left: 30px;">
+        <div *ngIf="kidData?.kidsData" class="sub-comments">
             <app-comments [data]="kidData.kidsData"></app-comments>
         </div>
     </mat-expansion-panel>

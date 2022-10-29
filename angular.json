@@ -23,7 +23,7 @@
           "options": {
             "outputPath": "dist/hn",
             "index": "src/index.html",
-            "baseHref": "https://akaashthawani.github.io/hn/",
+            "baseHref": "",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",

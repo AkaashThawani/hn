@@ -3,9 +3,18 @@
     padding: 5px;
     font-weight: 300;
 
-    .title-text{
+    .title-text {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
         font-weight: 500;
         font-size: larger;
         cursor: pointer;
+
+        .categories {
+            font-size: smaller;
+            font-weight: 300;
+            gap: 5px;
+        }
     }
 }

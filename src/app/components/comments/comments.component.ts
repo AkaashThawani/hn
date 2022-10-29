@@ -15,13 +15,9 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.sortCommentsOnTime();
-    // console.log(this.span)
-    // this.span.childNodes//.scrollIntoView({ behavior: "smooth", block: "start" })
-
   }
   scrollToNext(obj: any, index: number) {
     if (obj[index + 1]) {
-      // console.log(obj[index + 1].id)
       var next = document.getElementById(obj[index + 1].id)
       next?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }else{
@@ -33,14 +29,10 @@ export class CommentsComponent implements OnInit {
 
   scrollToParentNext(parentId:any){
     console.log(parentId)
-    // var nextSibling = document.getElementById(parentId)?.
-    // console.log(nextSibling)
-    // nextSibling?.scrollIntoView(({ behavior: 'smooth', block: 'start' }))
     }
 
   sortCommentsOnTime() {
     this.data.sort(({ time: a }, { time: b }) => a > b ? 1 : a < b ? -1 : 0)
-    // console.log("DS AFTER SORTING",this.data)
   }
 
   getTime(time: number) {

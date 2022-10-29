@@ -1,8 +1,18 @@
 .comment-info {
     display: flex;
     flex-direction: row;
+    flex-wrap:wrap;
     justify-content: start;
     align-items: center;
     gap: 4px;
 }
 
+@media screen and (max-width:900px){
+    .sub-comments{
+        margin-left: 5px;
+    }
+}
+
+.sub-comments{
+    margin-left: 25px;
+}

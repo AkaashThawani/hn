@@ -1,5 +1,15 @@
 <div class="title" fxLayout="row nowrap" fxLayoutAlign="space-between center">
-    <span class="title-text" routerLink="/">Hacker News</span>
+    <span class="title-text" routerLink="/">Hacker News
+        <span class="categories">
+            <span class="text-underline">New</span> |
+            <span class="text-underline">Past</span> |
+            <span class="text-underline">Comments</span> |
+            <span class="text-underline">Ask</span> |
+            <span class="text-underline">Show</span> |
+            <span class="text-underline">Jobs</span> |
+            <span class="text-underline">Submit </span>
+        </span>
+    </span>
     <span fxLayout="row nowrap" fxLayoutAlign="start center" fxLayoutGap="5px">
         <span>
             <mat-form-field appearance="outline">
@@ -10,8 +20,9 @@
             <button mat-icon-button [matMenuTriggerFor]="menuRef">
                 <mat-icon>account_circle</mat-icon>
             </button>
-            
+
             <mat-menu #menuRef="matMenu">
+                <div mat-menu-item routerLink="/user/">User</div>
                 <button mat-menu-item>
                     Log Out
                 </button>
