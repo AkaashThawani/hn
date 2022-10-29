@@ -20,6 +20,7 @@ import { MultiModeViewComponent } from './components/multi-mode-view/multi-mode-
 import { JobsComponent } from './components/jobs/jobs.component';
 import { ShowComponent } from './components/show/show.component';
 import { AskComponent } from './components/ask/ask.component';
+import { NewsComponent } from './components/news/news.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AskComponent } from './components/ask/ask.component';
     JobsComponent,
     ShowComponent,
     AskComponent,
+    NewsComponent,
   ],
   imports: [
     BrowserModule,
