@@ -19,12 +19,6 @@ const routes: Routes = [
   //   path: '',
   //   component: AppComponent,
   //   children: [
-
-      {
-        path: '',
-        redirectTo: 'news',
-        pathMatch: 'full'
-      },
       {
         path: 'news',
         component: NewsComponent
@@ -60,7 +54,7 @@ const routes: Routes = [
         path: 'favorites/:id',
         component: FavoritesHistoryComponent
       },
-    // ]
+  //   ]
   // }
 ];
 
