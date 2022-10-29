@@ -1,0 +1,39 @@
+
+<div fxLayout="column nowrap" fxLayoutAlign="start stretch" fxLayoutGap="10px" class="page">
+    <mat-accordion *ngFor="let story of paginatedData;index as i">
+        <mat-expansion-panel hideToggle expanded="true">
+            <div class="story">
+                <div *ngIf="paginated[i]?.title">
+                    <span class="story-title">{{story.index}}.
+                        <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon>  -->
+                        {{paginated[i]?.title}}
+                    </span>
+                    <a class="story-url" target="_blank"
+                        href="{{paginated[i]?.url}}">{{paginated[i]?.url}}</a>
+                </div>
+            </div>
+            <div>
+                <div class="story-info">{{paginated[i]?.score}} points by <a
+                        routerLink="/user/{{paginated[i]?.by}}">{{paginated[i]?.by}} </a>
+                    <a> {{getTime(paginated[i]?.time)}} </a> |
+                    <a routerLink="/story/{{paginated[i]?.id}}"> {{paginated[i]?.descendants}} comments
+                    </a>
+                </div>
+            </div>
+            <div *ngIf="!paginated[i]?.title">
+                <div class="skeleton skeleton-text"></div>
+                <div>
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text"></div>
+                </div>
+                <div>
+                    <div class="skeleton skeleton-text"></div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <mat-paginator paginator [length]="topStories.length" [pageSize]="20" (page)="onPageChange($event)"
+        showFirstLastButtons="true" aria-label="Select page">
+    </mat-paginator>
+</div>

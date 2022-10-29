@@ -19,13 +19,13 @@
         <mat-expansion-panel-header>
             <mat-panel-title>
                 <span class="comment-info" [id]="kidData.id">
-                    <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon>
+                    <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon> -->
                     <a routerLink="/user/{{kidData.by}}">{{kidData?.by +' '}}</a> 
                     <a>{{ getTime(kidData?.time)}} | </a>
-                    <span (click)="scrollToNext(data,i)" class="next" *ngIf="!last">next</span>
+                    <span (click)="scrollToNext(data,i)" class="next" *ngIf="!last" matTooltip="Go to next">next</span>
                     <span>
-                        <span *ngIf="mep.expanded==true" (click)="mep.expanded=!mep.expanded" class="minimize"> [ - ] </span>
-                        <span *ngIf="mep.expanded==false" (click)="mep.expanded=!mep.expanded" class="minimize">[ {{kidData?.kids?.length || 1}} more ]</span>
+                        <span *ngIf="mep.expanded==true" (click)="mep.expanded=!mep.expanded" class="minimize" matTooltip="minimize"> [ - ] </span>
+                        <span *ngIf="mep.expanded==false" (click)="mep.expanded=!mep.expanded" class="minimize" matTooltip="expand">[ + ]</span>
                     </span> 
                     
                 </span>
