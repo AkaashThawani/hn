@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
 import { APIService } from 'src/app/services/api.service';
@@ -8,7 +8,7 @@ import { APIService } from 'src/app/services/api.service';
   templateUrl: './multi-mode-view.component.html',
   styleUrls: ['./multi-mode-view.component.scss']
 })
-export class MultiModeViewComponent implements OnInit {
+export class MultiModeViewComponent implements OnInit,OnChanges {
 
   topStories = []
   dataOBS$!: Observable<any[]>;
@@ -26,6 +26,10 @@ export class MultiModeViewComponent implements OnInit {
   ngOnInit(): void {
     // console.log('viewMode',this.viewMode)
     this.getAPI(this.viewMode);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getAPI(this.viewMode)
   }
 
   onPageChange(event: PageEvent) {

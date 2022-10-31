@@ -17,10 +17,6 @@ import { UserComponent } from './components/user/user.component';
 // import { SubmissionHistoryComponent } from './components/submission-history/submission-history.component';
 // import { FavoritesHistoryComponent } from './components/favorites-history/favorites-history.component';
 import { MultiModeViewComponent } from './components/multi-mode-view/multi-mode-view.component';
-import { JobsComponent } from './components/jobs/jobs.component';
-import { ShowComponent } from './components/show/show.component';
-import { AskComponent } from './components/ask/ask.component';
-import { NewsComponent } from './components/news/news.component';
 
 @NgModule({
   declarations: [
@@ -30,14 +26,7 @@ import { NewsComponent } from './components/news/news.component';
     HeadingComponent,
     CommentsComponent,
     UserComponent,
-    // CommentsHistoryComponent,
-    // SubmissionHistoryComponent,
-    // FavoritesHistoryComponent,
     MultiModeViewComponent,
-    JobsComponent,
-    ShowComponent,
-    AskComponent,
-    NewsComponent,
   ],
   imports: [
     BrowserModule,
