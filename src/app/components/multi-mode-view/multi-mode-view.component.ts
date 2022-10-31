@@ -24,7 +24,7 @@ export class MultiModeViewComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log('viewMode',this.viewMode)
+    // console.log('viewMode',this.viewMode)
     this.getAPI(this.viewMode);
   }
 

@@ -33,7 +33,7 @@
         </mat-expansion-panel-header>
         <div class="comment-body">
             <div class="comment-text" [innerHTML]="kidData?.text"></div>
-            <div class="comment-reply">reply</div>
+            <!-- <div class="comment-reply">reply</div> -->
         </div>
         <div *ngIf="kidData?.kidsData" class="sub-comments">
             <app-comments [data]="kidData.kidsData"></app-comments>

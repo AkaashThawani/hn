@@ -13,9 +13,9 @@ import { StoryComponent } from './components/story/story.component';
 import { HeadingComponent } from './components/heading/heading.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { UserComponent } from './components/user/user.component';
-import { CommentsHistoryComponent } from './components/comments-history/comments-history.component';
-import { SubmissionHistoryComponent } from './components/submission-history/submission-history.component';
-import { FavoritesHistoryComponent } from './components/favorites-history/favorites-history.component';
+// import { CommentsHistoryComponent } from './components/comments-history/comments-history.component';
+// import { SubmissionHistoryComponent } from './components/submission-history/submission-history.component';
+// import { FavoritesHistoryComponent } from './components/favorites-history/favorites-history.component';
 import { MultiModeViewComponent } from './components/multi-mode-view/multi-mode-view.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { ShowComponent } from './components/show/show.component';
@@ -30,9 +30,9 @@ import { NewsComponent } from './components/news/news.component';
     HeadingComponent,
     CommentsComponent,
     UserComponent,
-    CommentsHistoryComponent,
-    SubmissionHistoryComponent,
-    FavoritesHistoryComponent,
+    // CommentsHistoryComponent,
+    // SubmissionHistoryComponent,
+    // FavoritesHistoryComponent,
     MultiModeViewComponent,
     JobsComponent,
     ShowComponent,

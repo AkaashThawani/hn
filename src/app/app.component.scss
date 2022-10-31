@@ -3,7 +3,7 @@
 }
 
 .mat-expansion-panel-body,.mat-expansion-panel-header{
-    padding: 0px 8px !important;
+    padding: 8px 4px !important;
 }
 
 .mat-expansion-panel-header.mat-expanded{
@@ -20,14 +20,9 @@
     border-radius: 5px;
 }
 
-.content {
-    margin: 0 15%;
-}
-
 .page {
-    background-color: lightyellow;
-    padding: 10px;
-
+    background-color: lightgrey;
+    box-shadow: none;
     .story {
         .story-title {
             padding-right: 5px;
@@ -41,7 +36,7 @@
             align-items: center;
             color: #828282;
             font-size: smaller;
-            gap: 5px;
+            gap: 15px;
 
             a:hover {
                 text-decoration: underline;
@@ -138,8 +133,10 @@
 }
 
 .mat-expansion-panel:not([class*="mat-elevation-z"]){
-    box-shadow:  none;
-    background-color: inherit;
+    box-shadow:none;
+    border-radius: 0px !important;
+    background-color: white;
+
 }
 
 @media screen and (max-width:900px){
@@ -159,4 +156,23 @@
 
 .text-underline:hover{
     text-decoration: underline;
+}
+
+.primary-btn{
+    width: 100px;
+    background-color: orange;
+}
+
+.secondary-btn{
+    width: 100px;
+    background-color: lightyellow;
+}
+
+.rActive{
+    background:rgba(0,0,2,0.2)
+}
+
+mat-card{
+    // padding: 0px !important;
+    border-radius: 0px !important;
 }

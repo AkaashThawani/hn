@@ -1,5 +1,4 @@
-
-<div fxLayout="column nowrap" fxLayoutAlign="start stretch" fxLayoutGap="10px" class="page">
+<mat-card fxLayout="column nowrap" fxLayoutAlign="start stretch" fxLayoutGap="10px" class="page">
     <mat-accordion *ngFor="let story of paginatedData;index as i">
         <mat-expansion-panel hideToggle expanded="true">
             <div class="story">
@@ -8,16 +7,21 @@
                         <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon>  -->
                         {{paginated[i]?.title}}
                     </span>
-                    <a class="story-url" target="_blank"
-                        href="{{paginated[i]?.url}}">{{paginated[i]?.url}}</a>
+                    <a class="story-url" target="_blank" href="{{paginated[i]?.url}}">{{paginated[i]?.url}}</a>
                 </div>
-            </div>
-            <div>
-                <div class="story-info">{{paginated[i]?.score}} points by <a
-                        routerLink="/user/{{paginated[i]?.by}}">{{paginated[i]?.by}} </a>
-                    <a> {{getTime(paginated[i]?.time)}} </a> |
-                    <a routerLink="/story/{{paginated[i]?.id}}"> {{paginated[i]?.descendants}} comments
-                    </a>
+                <div>
+                    <div class="story-info">
+                        <span>
+                            {{paginated[i]?.score}} points
+                        </span>
+                        <a routerLink="/story/{{paginated[i]?.id}}">
+                            {{paginated[i]?.descendants}} comments
+                        </a>
+                        <a routerLink="/user/{{paginated[i]?.by}}">
+                            {{paginated[i]?.by.trim()}}
+                        </a>
+                        <a> {{getTime(paginated[i]?.time)}} </a>
+                    </div>
                 </div>
             </div>
             <div *ngIf="!paginated[i]?.title">
@@ -36,4 +40,4 @@
     <mat-paginator paginator [length]="topStories.length" [pageSize]="20" (page)="onPageChange($event)"
         showFirstLastButtons="true" aria-label="Select page">
     </mat-paginator>
-</div>
+</mat-card>

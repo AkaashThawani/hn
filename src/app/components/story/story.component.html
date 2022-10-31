@@ -1,20 +1,21 @@
 <app-heading></app-heading>
 <div class="page">
-    <div class="story">
+    <mat-card class="story">
         <span class="story-title">{{storyData?.title}}</span>
+        <div *ngIf="storyData?.text" [innerHTML]="storyData.text"></div>
         <a class="story-url" target="_blank" href="{{storyData?.url}}">{{storyData?.url}}</a>
         <div class="story-info">{{storyData.score}} points by <a routerLink="/user/{{storyData?.by}}">{{storyData?.by}} </a>
             <a> {{getTime(storyData.time)}} </a> |
             <a routerLink="/story/{{storyData.id}}"> {{storyData?.descendants}} comments </a>
         </div>
-    </div>
-    <div fxLayout="column nowrap">
+    </mat-card>
+    <!-- <div fxLayout="column nowrap">
         <mat-form-field appearance="outline">
             <textarea class="textarea" matInput cols="50" rows="5" fxFlex></textarea>
         </mat-form-field>
     </div>
-    <button mat-button color="primary">Add Comment</button>
-    <div fxLayout="column nowrap" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+    <button mat-button color="primary">Add Comment</button> -->
+    <div style="margin-top:10px ;" fxLayout="column nowrap" fxLayoutAlign="start stretch" fxLayoutGap="15px">
         <app-comments [data]="kidsArrayData"></app-comments>
     </div>
 </div>
