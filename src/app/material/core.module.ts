@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatDivider, MatDividerModule } from '@angular/material/divider';
 // import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -35,7 +36,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgModule } from '@angular/core';
 
 
-@NgModule( {
+@NgModule({
     imports: [
         BrowserAnimationsModule,
         // MatCheckboxModule,
@@ -45,6 +46,7 @@ import { NgModule } from '@angular/core';
         // MatAutocompleteModule,
         // MatDatepickerModule,
         MatFormFieldModule,
+        MatDividerModule,
         // MatRadioModule,
         // MatSelectModule,
         // MatSliderModule,
@@ -90,12 +92,13 @@ import { NgModule } from '@angular/core';
         // MatDatepickerModule,
         // MatChipsModule,
         MatTooltipModule,
+        MatDividerModule,
         // MatTableModule,
         MatPaginatorModule
     ],
     providers: [
         MatDatepickerModule,
     ]
-} )
+})
 
 export class CoreModule { }

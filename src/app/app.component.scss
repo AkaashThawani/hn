@@ -3,12 +3,14 @@
 }
 
 .mat-expansion-panel-body,.mat-expansion-panel-header{
-    padding: 8px 4px !important;
+    padding: 4px !important;
 }
-
-.mat-expansion-panel-header.mat-expanded{
-    height: 40px !important;
+.mat-expansion-panel-header{
+    height: 34px !important;
 }
+// .mat-expansion-panel-header.mat-expanded{
+    // height: 40px !important;
+// }
 
 .mat-form-field-infix {
     padding: 0px !important;
@@ -24,6 +26,7 @@
     background-color: lightgrey;
     box-shadow: none;
     .story {
+        flex-grow: 1;
         .story-title {
             padding-right: 5px;
         }
@@ -173,6 +176,6 @@
 }
 
 mat-card{
-    // padding: 0px !important;
+    padding: 0px !important;
     border-radius: 0px !important;
 }

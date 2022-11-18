@@ -1,9 +1,17 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
+import { HeadingComponent } from '../heading/heading.component';
 
 @Component({
   selector: 'app-user',
+  standalone:true,
+  imports:[
+    HeadingComponent,
+    NgIf,
+    RouterLink
+  ],
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })

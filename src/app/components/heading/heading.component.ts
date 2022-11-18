@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-heading',
+  standalone:true,
+  imports:[
+    MatButtonModule,
+    RouterLink,
+    RouterLinkActive
+  ],
   templateUrl: './heading.component.html',
   styleUrls: ['./heading.component.scss']
 })

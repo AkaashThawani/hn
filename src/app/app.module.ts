@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoreModule } from './material/core.module';
-import { LandingComponent } from './components/landing/landing.component';
 import { APIService } from './services/api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { StoryComponent } from './components/story/story.component';
@@ -17,12 +16,11 @@ import { MultiModeViewComponent } from './components/multi-mode-view/multi-mode-
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent,
-    StoryComponent,
-    HeadingComponent,
-    CommentsComponent,
-    UserComponent,
-    MultiModeViewComponent,
+    // StoryComponent,
+    // HeadingComponent,
+    // CommentsComponent,
+    // UserComponent,
+    // MultiModeViewComponent,
   ],
   imports: [
     BrowserModule,
