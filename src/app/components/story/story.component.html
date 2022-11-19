@@ -6,7 +6,7 @@
             <div fxFlex>
                 <span class="story-title bold">{{storyData?.title}}</span>
                 <div *ngIf="storyData?.text" [innerHTML]="storyData.text"></div>
-                <a class="story-url" target="_blank" href="{{storyData?.url}}">{{storyData?.url}}</a>
+                <div class="story-url" (click)="open(storyData?.url)">{{storyData?.url}}</div>
                 <div class="story-info">
                     <button class="text-left" mat-flat-button routerLink="/user/{{storyData?.by}}">{{storyData?.by}}
                     </button>

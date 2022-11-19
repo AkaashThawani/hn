@@ -82,5 +82,8 @@ export class StoryComponent implements OnInit {
       return commentData
     }
   }
+  open(url:any){
+    window.open(url,'_blank')
+  }
 
 }

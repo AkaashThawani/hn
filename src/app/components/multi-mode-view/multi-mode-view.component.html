@@ -6,7 +6,7 @@
                 <div class="m-20" fxFlex="15">
                     {{paginated[i]?.score}}
                 </div>
-                <div class="story" fxFlex fxFlex.lt-sm="85">
+                <div class="story" [fxFlex]="paginated[i]?.type!='job' ? 70:85" >
                     <div *ngIf="paginated[i]?.title">
                         <span class="story-title">
                             <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon>  -->
