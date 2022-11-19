@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,13 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'HackerNews';
-  // constructor(private router:Router){
-  //   this.router.navigate(['/news'])
-  // }
+  afterRefresh:string='';
+  constructor(private router:Router){
+    this.afterRefresh = window.location.href.split('#')[1] || '/news';
+    if(this.afterRefresh == '/'){
+      this.afterRefresh='news'
+    }
+    console.log(this.afterRefresh)
+    this.router.navigate([this.afterRefresh])
+  }
 }

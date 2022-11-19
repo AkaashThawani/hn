@@ -43,9 +43,15 @@ export class CommentsComponent implements OnInit {
   sortCommentsOnTime() {
     this.data.sort(({ time: a }, { time: b }) => a > b ? 1 : a < b ? -1 : 0)
   }
-
   getTime(time: number) {
-    return new Date(time * 1000).toLocaleDateString();
+    var currentDateAndTime = new Date().getTime();
+    var k: any = new Date(time * 1000).getTime();
+    if (currentDateAndTime - k <= 3600000) {
+      return new Date(currentDateAndTime - k ).getUTCMinutes() + ' minutes';
+    }
+    else {
+      return new Date(currentDateAndTime - k ).getUTCHours() + ' hours';
+    }
   }
 
 }

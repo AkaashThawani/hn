@@ -1,5 +1,6 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
 import { HeadingComponent } from '../heading/heading.component';
@@ -10,7 +11,8 @@ import { HeadingComponent } from '../heading/heading.component';
   imports:[
     HeadingComponent,
     NgIf,
-    RouterLink
+    RouterLink,
+    FlexLayoutModule,
   ],
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
@@ -32,8 +34,15 @@ export class UserComponent implements OnInit {
     })
   }
 
-  getTime(seconds:number){
-    return new Date(seconds).toDateString();
+  getTime(time: number) {
+    var currentDateAndTime = new Date().getTime();
+    var k: any = new Date(time * 1000).getTime();
+    if (currentDateAndTime - k <= 3600000) {
+      return new Date(currentDateAndTime - k ).getUTCMinutes() + ' minutes';
+    }
+    else {
+      return new Date(currentDateAndTime - k ).getUTCHours() + ' hours';
+    }
   }
 
 }

@@ -100,4 +100,8 @@ export class MultiModeViewComponent implements OnInit {
     }
   }
 
+  open(url:any){
+    window.open(url,'_blank');
+  }
+
 }

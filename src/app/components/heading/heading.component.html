@@ -1,27 +1,8 @@
-<div class="title" fxLayout="row nowrap" fxLayoutAlign="space-between center">
-    <span class="title-text" routerLink="/news">Hacker News</span>
+<div class="title" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayout.lt-sm="column wrap" fxLayoutAlign.lt-sm="start center" fxLayoutGap.lt-sm="10px">
+    <span class="title-text ticon text-center" routerLink="/news">HN</span>
     <span class="categories">
         <button  mat-flat-button class="primary-btn" routerLink="/ask" routerLinkActive="rActive">Ask</button> 
         <button  mat-flat-button class="primary-btn" routerLink="/show" routerLinkActive="rActive">Show</button> 
         <button  mat-flat-button class="primary-btn" routerLink="/jobs" routerLinkActive="rActive">Jobs</button> 
     </span>
-    <!-- <span fxLayout="row nowrap" fxLayoutAlign="start center" fxLayoutGap="5px">
-        <span>
-            <mat-form-field appearance="outline">
-                <input matInput>
-            </mat-form-field>
-        </span>
-        <span>
-            <button mat-icon-button [matMenuTriggerFor]="menuRef">
-                <mat-icon>account_circle</mat-icon>
-            </button>
-
-            <mat-menu #menuRef="matMenu">
-                <div mat-menu-item routerLink="/user/">User</div>
-                <button mat-menu-item>
-                    Log Out
-                </button>
-            </mat-menu>
-        </span>
-    </span> -->
 </div>

@@ -1,7 +1,11 @@
 .title {
-    background-color: orange;
+    background-color: darkorange;
     padding: 5px;
     font-weight: 300;
+    color: white;
+    // position: fixed;
+    // top: 0px;
+    // height: 10%;
 
     .title-text {
         display: flex;
@@ -20,4 +24,13 @@
    justify-content: flex-start;
    align-items: center;
    gap: 15px;
+   button{
+    color: white;
+   }
+}
+
+.ticon{
+    border: 2px solid white;
+    columns: white;
+    padding: 5px;
 }

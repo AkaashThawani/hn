@@ -1,4 +1,4 @@
-<app-heading></app-heading>
+<app-heading class="sticky"></app-heading>
 <mat-card fxLayout="column nowrap" fxLayoutAlign="start stretch" class="page">
     <mat-accordion *ngFor="let story of paginatedData;index as i;last as l">
         <mat-expansion-panel hideToggle expanded="true">
@@ -6,24 +6,25 @@
                 <div class="m-20" fxFlex="15">
                     {{paginated[i]?.score}}
                 </div>
-                <div class="story" fxFlex="70"> 
+                <div class="story" fxFlex fxFlex.lt-sm="85">
                     <div *ngIf="paginated[i]?.title">
-                        <span class="story-title">{{story.index}}.
+                        <span class="story-title">
                             <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon>  -->
                             {{paginated[i]?.title}}
                         </span>
-                        <a class="story-url" target="_blank" href="{{paginated[i]?.url}}">{{paginated[i]?.url}}</a>
+                        <div class="story-url cursor-pointer" target="_blank" (click)="open(paginated[i]?.url)">{{paginated[i]?.url}}
+                        </div>
                     </div>
                     <div>
                         <div class="story-info">
-                            <button mat-flat-button routerLink="/user/{{paginated[i]?.by}}">
+                            <button class="text-left" mat-flat-button routerLink="/user/{{paginated[i]?.by}}">
                                 {{paginated[i]?.by.trim()}}
                             </button>
                             <a> {{getTime(paginated[i]?.time)}} </a>
                         </div>
                     </div>
                 </div>
-                <div class="m-20c cursor-pointer" fxFlex="15">
+                <div *ngIf="paginated[i]?.type!='job'" class="m-20c cursor-pointer" fxFlex="15">
                     <div routerLink="/story/{{paginated[i]?.id}}">
                         <div>
                             <mat-icon>mode_comment</mat-icon>

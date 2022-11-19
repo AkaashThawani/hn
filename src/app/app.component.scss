@@ -23,9 +23,14 @@
 }
 
 .page {
+    // margin-top:7.5%;
     background-color: lightgrey;
     box-shadow: none;
     .story {
+        // display: flex;
+        // flex-direction: row;
+        // justify-content: center;
+        // align-items: center;
         flex-grow: 1;
         .story-title {
             padding-right: 5px;
@@ -35,8 +40,9 @@
         .story-info {
             display: flex;
             flex-direction: row;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
+            overflow: hidden;
             color: #828282;
             font-size: smaller;
             gap: 15px;
@@ -45,6 +51,9 @@
                 text-decoration: underline;
                 cursor: pointer;
             }
+        }
+        .story-info:last-child{
+            margin-right: 10px;
         }
     }
 }
@@ -142,11 +151,17 @@
 
 }
 
-@media screen and (max-width:900px){
+@media screen and (max-height:900px){
     .content{
         margin: 0px;
     }
 }
+
+// @media screen and (max-height:450px){
+//     .page{
+//         margin-top: 28%;
+//     }
+// }
 
 .text-center{
     text-align: center;
@@ -163,7 +178,7 @@
 
 .primary-btn{
     width: 100px;
-    background-color: orange;
+    background-color: darkorange;
 }
 
 .secondary-btn{
@@ -178,4 +193,44 @@
 mat-card{
     padding: 0px !important;
     border-radius: 0px !important;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+    height: inherit;
+    width: 100%;
+    z-index: 2;
+}
+.m-20 {
+    text-align: center;
+    // width: 15%;
+    color: darkorange;
+    // flex: auto;
+}
+
+.m-20c {
+    text-align: center;
+    // width: 15%;
+    color: darkorange;
+    display: flex;
+    // flex: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.row-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+button {
+    padding: 0px !important;
+}
+
+.text-left {
+    text-align: left !important;
 }

@@ -1,5 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
@@ -16,6 +18,8 @@ import { HeadingComponent } from '../heading/heading.component';
     MatCardModule,
     NgIf,
     CommentsComponent,
+    MatButtonModule,
+    FlexLayoutModule
   ],
   templateUrl: './story.component.html',
   styleUrls: ['./story.component.scss']
@@ -53,9 +57,15 @@ export class StoryComponent implements OnInit {
   }
 
   getTime(time: number) {
-    return new Date(time * 1000).toLocaleDateString();
+    var currentDateAndTime = new Date().getTime();
+    var k: any = new Date(time * 1000).getTime();
+    if (currentDateAndTime - k <= 3600000) {
+      return new Date(currentDateAndTime - k ).getUTCMinutes() + ' minutes';
+    }
+    else {
+      return new Date(currentDateAndTime - k ).getUTCHours() + ' hours';
+    }
   }
-
   getSubKids(commentData: any) {
     if (commentData.kids) {
       let temp: Object[] = [];
