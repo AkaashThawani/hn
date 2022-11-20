@@ -30,14 +30,14 @@ export class CommentsComponent implements OnInit {
       var next = document.getElementById(obj[index + 1].id)
       next?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }else{
-      console.log('parent scroll trig')
+      // console.log('parent scroll trig')
       this.scrollToParentNext(obj[index].parent)
     }
-    console.log(obj)
+    // console.log(obj)
   }
 
   scrollToParentNext(parentId:any){
-    console.log(parentId)
+    // console.log(parentId)
     }
 
   sortCommentsOnTime() {

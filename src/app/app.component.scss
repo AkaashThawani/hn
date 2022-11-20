@@ -29,6 +29,7 @@
     .story {
         // display: flex;
         // flex-direction: row;
+        background-color: white;
         // justify-content: center;
         // align-items: center;
         flex-grow: 1;
@@ -44,7 +45,7 @@
             align-items: center;
             overflow: hidden;
             color: #828282;
-            font-size: smaller;
+            font-size:12px;
             gap: 15px;
 
             a:hover {
@@ -62,7 +63,7 @@
 
     .comment-info {
         color: #828282;
-        font-size: smaller;
+        font-size:12px;
 
         a:hover {
             text-decoration: underline;
@@ -80,7 +81,7 @@
         padding-left: 5px;
 
         .comment-reply {
-            font-size: smaller;
+            font-size:12px;
             color: brown;
         }
 

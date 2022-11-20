@@ -8,7 +8,7 @@
                 <div *ngIf="storyData?.text" [innerHTML]="storyData.text"></div>
                 <div class="story-url" (click)="open(storyData?.url)">{{storyData?.url}}</div>
                 <div class="story-info">
-                    <button class="text-left" mat-flat-button routerLink="/user/{{storyData?.by}}">{{storyData?.by}}
+                    <button class="text-left justify-content-start" mat-flat-button routerLink="/user/{{storyData?.by}}">{{storyData?.by}}
                     </button>
                     <div> {{storyData?.descendants}} comments </div>
                     <div> {{getTime(storyData.time)}} </div>

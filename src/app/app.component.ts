@@ -2,9 +2,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router';
-import { AppRoutingModule } from './app-routing.module';
-import { APIService } from './services/api.service';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { LandingComponent } from './components/landing/landing.component';
+// import { AppRoutingModule } from './app-routing.module';
+// import { APIService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +13,9 @@ import { APIService } from './services/api.service';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterOutlet,
+    LandingComponent,
+    RouterModule,
     HttpClientModule,
-    AppRoutingModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],

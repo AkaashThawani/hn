@@ -2,7 +2,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-heading',
@@ -11,7 +12,8 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
     MatButtonModule,
     RouterLink,
     RouterLinkActive,
-    FlexLayoutModule
+    FlexLayoutModule,
+    // BrowserAnimationsModule
   ],
   templateUrl: './heading.component.html',
   styleUrls: ['./heading.component.scss'],
