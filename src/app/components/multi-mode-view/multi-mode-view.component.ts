@@ -45,7 +45,6 @@ export class MultiModeViewComponent implements OnInit {
   viewMode: string = '';
 
   constructor(private apiService: APIService, private activatedRoute: ActivatedRoute, private router: Router) {
-    // this.router.onSameUrlNavigation='reload'
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
