@@ -1,12 +1,21 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter, RouterModule } from '@angular/router';
+import { AppRoutingModule, myRoutes } from './app/app-routing.module';
+import { AppComponent } from './app/app.component';
+import { APIService } from './app/services/api.service';
 
-import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+bootstrapApplication(AppComponent, {
+  providers: [ 
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    importProvidersFrom(AppRoutingModule)
+  ]
+}).catch(err => console.error(err));
+

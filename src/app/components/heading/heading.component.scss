@@ -25,7 +25,8 @@
    align-items: center;
    gap: 15px;
    button{
-    color: white;
+    color: white !important;
+    background-color: inherit  !important;
    }
 }
 

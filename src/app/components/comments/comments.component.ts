@@ -1,8 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterLink } from '@angular/router';
-import { HeadingComponent } from '../heading/heading.component';
 
 @Component({
   selector: 'app-comments',
@@ -28,16 +27,16 @@ export class CommentsComponent implements OnInit {
   scrollToNext(obj: any, index: number) {
     if (obj[index + 1]) {
       var next = document.getElementById(obj[index + 1].id)
-      next?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      next?.scrollIntoView({ behavior: 'smooth', block: 'start'})
     }else{
-      console.log('parent scroll trig')
+      // console.log('parent scroll trig')
       this.scrollToParentNext(obj[index].parent)
     }
-    console.log(obj)
+    // console.log(obj)
   }
 
   scrollToParentNext(parentId:any){
-    console.log(parentId)
+    // console.log(parentId)
     }
 
   sortCommentsOnTime() {

@@ -1,7 +1,7 @@
 <app-heading class="sticky"></app-heading>
-<mat-card fxLayout="column nowrap" fxLayoutAlign="start stretch" class="page">
-    <mat-accordion *ngFor="let story of paginatedData;index as i;last as l">
-        <mat-expansion-panel hideToggle expanded="true">
+<mat-card appearance="outlined" fxLayout="column nowrap" fxLayoutAlign="start stretch" class="page">
+    <div *ngFor="let story of paginatedData;index as i;last as l">
+        <div>
             <div class="row-center">
                 <div class="m-20" fxFlex="15">
                     {{paginated[i]?.score}}
@@ -17,10 +17,10 @@
                     </div>
                     <div>
                         <div class="story-info">
-                            <button class="text-left" mat-flat-button routerLink="/user/{{paginated[i]?.by}}">
+                            <button class="justify-content-start bold" mat-flat-button routerLink="/user/{{paginated[i]?.by}}">
                                 {{paginated[i]?.by.trim()}}
                             </button>
-                            <a> {{getTime(paginated[i]?.time)}} </a>
+                            <span> {{getTime(paginated[i]?.time)}} </span>
                         </div>
                     </div>
                 </div>
@@ -43,9 +43,9 @@
                     <div class="skeleton skeleton-text"></div>
                 </div>
             </div>
-        </mat-expansion-panel>
+        </div>
         <mat-divider *ngIf="!l"></mat-divider>
-    </mat-accordion>
+    </div>
     <mat-paginator paginator [length]="topStories.length" [pageSize]="20" (page)="onPageChange($event)"
         showFirstLastButtons="true" aria-label="Select page">
     </mat-paginator>

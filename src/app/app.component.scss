@@ -1,3 +1,5 @@
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
 .mat-form-field-appearance-outline .mat-form-field-infix {
     padding: 0px !important;
 }
@@ -12,10 +14,12 @@
     // height: 40px !important;
 // }
 
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
 .mat-form-field-infix {
     padding: 0px !important;
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
 .mat-form-field-wrapper {
     padding-bottom: 0px !important;
     background-color: white;
@@ -24,7 +28,7 @@
 
 .page {
     // margin-top:7.5%;
-    background-color: lightgrey;
+    background-color: white;
     box-shadow: none;
     .story {
         // display: flex;
@@ -44,7 +48,7 @@
             align-items: center;
             overflow: hidden;
             color: #828282;
-            font-size: smaller;
+            font-size: 12px;
             gap: 15px;
 
             a:hover {
@@ -62,7 +66,7 @@
 
     .comment-info {
         color: #828282;
-        font-size: smaller;
+        font-size: 12px;
 
         a:hover {
             text-decoration: underline;
@@ -80,7 +84,7 @@
         padding-left: 5px;
 
         .comment-reply {
-            font-size: smaller;
+            font-size: 12px;
             color: brown;
         }
 
@@ -187,9 +191,10 @@
 }
 
 .rActive{
-    background:rgba(0,0,2,0.2)
+    background:rgba(0,0,2,0.2) !important
 }
 
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
 mat-card{
     padding: 0px !important;
     border-radius: 0px !important;
@@ -229,8 +234,14 @@ mat-card{
 
 button {
     padding: 0px !important;
+    background-color: inherit;
 }
 
-.text-left {
+.justify-content-start {
     text-align: left !important;
+    // @extend justify-content-start;
+}
+
+.justify-content-start{
+    justify-content: flex-start !important
 }

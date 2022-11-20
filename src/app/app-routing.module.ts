@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+// import { APIService } from './services/api.service';
 
-const routes: Routes = [
+export const myRoutes: Routes = [
       {
         path:':id',
-        // component:MultiModeViewComponent,
-        loadComponent:() => import('./components/multi-mode-view/multi-mode-view.component').then(c=>c.MultiModeViewComponent) 
+        loadComponent:() => import('./components/multi-mode-view/multi-mode-view.component').then(c=>c.MultiModeViewComponent),
+        // providers:[
+        //   APIService
+        // ]
       },
       {
         path: 'story/:id',
@@ -17,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
+  imports: [RouterModule.forRoot(myRoutes, {
     useHash: true,
     anchorScrolling: 'enabled',
     onSameUrlNavigation:'reload'

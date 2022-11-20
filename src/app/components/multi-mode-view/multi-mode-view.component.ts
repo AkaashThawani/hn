@@ -1,16 +1,17 @@
-import { NgFor, NgForOf, NgIf } from '@angular/common';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import { Component,OnInit, ViewChild } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCard, MatCardModule } from '@angular/material/card';
-import { MatDivider, MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
+import {  MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { APIService } from 'src/app/services/api.service';
 import { HeadingComponent } from '../heading/heading.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @Component({
@@ -23,6 +24,7 @@ import { HeadingComponent } from '../heading/heading.component';
     RouterLink,
     MatButtonModule,
     MatExpansionModule,
+    HttpClientModule,
     MatCardModule,
     HeadingComponent,
     MatIconModule,
@@ -45,19 +47,18 @@ export class MultiModeViewComponent implements OnInit {
   viewMode: string = '';
 
   constructor(private apiService: APIService, private activatedRoute: ActivatedRoute, private router: Router) {
-    // this.router.onSameUrlNavigation='reload'
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((res: any) => {
-      console.log(res)
+      // console.log(res)
       this.viewMode = res.id
       // this.router.navigated=false;
     });
     this.getAPI(this.viewMode);
-    console.log('act', this.activatedRoute)
+    // console.log('act', this.activatedRoute)
   }
 
   onPageChange(event: PageEvent) {
@@ -105,3 +106,4 @@ export class MultiModeViewComponent implements OnInit {
   }
 
 }
+

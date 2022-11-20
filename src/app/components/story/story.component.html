@@ -1,6 +1,6 @@
 <app-heading class="sticky"></app-heading>
 <div class="page">
-    <mat-card class="story">
+    <mat-card appearance="outlined" class="story">
         <div class="p-15" fxLayout="row wrap" fxLayoutAlign="start center">
             <div class="m-20" fxFlex="15">{{storyData.score}}</div>
             <div fxFlex>
@@ -8,7 +8,7 @@
                 <div *ngIf="storyData?.text" [innerHTML]="storyData.text"></div>
                 <div class="story-url" (click)="open(storyData?.url)">{{storyData?.url}}</div>
                 <div class="story-info">
-                    <button class="text-left" mat-flat-button routerLink="/user/{{storyData?.by}}">{{storyData?.by}}
+                    <button class="justify-content-start" mat-flat-button routerLink="/user/{{storyData?.by}}">{{storyData?.by}}
                     </button>
                     <div> {{storyData?.descendants}} comments </div>
                     <div> {{getTime(storyData.time)}} </div>

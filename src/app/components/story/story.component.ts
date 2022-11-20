@@ -14,7 +14,7 @@ import { HeadingComponent } from '../heading/heading.component';
   imports: [
     HeadingComponent,
     RouterLink,
-    RouterLinkActive,
+    // RouterLinkActive,
     MatCardModule,
     NgIf,
     CommentsComponent,
@@ -87,3 +87,4 @@ export class StoryComponent implements OnInit {
   }
 
 }
+
