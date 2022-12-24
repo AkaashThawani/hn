@@ -10,6 +10,7 @@ export class CommentsComponent implements OnInit {
 
   @Input() data: any[] = [];
   @ViewChild("", { static: false }) span!: Element;
+  next:any
 
   constructor() { }
 
@@ -17,9 +18,11 @@ export class CommentsComponent implements OnInit {
     this.sortCommentsOnTime();
   }
   scrollToNext(obj: any, index: number) {
+    if(this.next)
     if (obj[index + 1]) {
-      var next = document.getElementById(obj[index + 1].id)
-      next?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      this.next = document.getElementById(obj[index + 1].id)
+      this.next?.classList.add('blo');
+      this.next?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }else{
       // console.log('parent scroll trig')
       this.scrollToParentNext(obj[index].parent)

@@ -16,6 +16,8 @@ import { RouterModule } from '@angular/router';
 import { LandingComponent } from './components/landing/landing.component';
 import { LoaderService } from './services/loader.service';
 import { LoaderInterceptor } from './interceptor/loader.interceptor';
+import { ManageHttpInterceptor } from './services/http-interceptor.service';
+import { HttpCancelService } from './services/http-cancel.service';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { LoaderInterceptor } from './interceptor/loader.interceptor';
   providers: [
     APIService,
     LoaderService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+    HttpCancelService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ManageHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
