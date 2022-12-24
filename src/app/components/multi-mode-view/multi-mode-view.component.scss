@@ -3,7 +3,9 @@
     cursor: pointer;
 }
 
-
+.disabled-text{
+    color: #00000042;
+}
 
 .mat-expansion-panel-spacing {
     margin: 0px !important;
@@ -11,4 +13,8 @@
 
 .justify-content-start{
     justify-content: flex-start !important;
+}
+
+.mat-column-upvote{
+    width: 15%;
 }

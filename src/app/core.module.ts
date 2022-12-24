@@ -35,7 +35,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 // import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import { MatSortModule } from '@angular/material/sort';
 // import { MatStepperModule } from '@angular/material/stepper';
-// import { MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 // import { MatTabsModule } from '@angular/material/tabs';
 // import { MatToolbarModule } from '@angular/material/toolbar';
 // import { MatTooltipModule } from '@angular/material/tooltip';
@@ -58,6 +58,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     // MatInputModule,
     // MatSelectModule,
     // MatRadioModule,
+    // MatTableModule,
     LayoutModule
   ],
   exports: [
@@ -99,7 +100,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     // MatSnackBarModule,
     // MatSortModule,
     // MatStepperModule,
-    // MatTableModule,
+    MatTableModule,
     // MatTabsModule,
     // MatTooltipModule,
     // MatTreeModule,

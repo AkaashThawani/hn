@@ -1,52 +1,106 @@
 <app-heading class="sticky"></app-heading>
 <mat-card fxLayout="column nowrap" fxLayoutAlign="start stretch" class="page">
-    <mat-accordion *ngFor="let story of paginatedData;index as i;last as l">
-        <mat-expansion-panel hideToggle expanded="true">
-            <div class="row-center">
-                <div class="m-20" fxFlex="15">
-                    {{paginated[i]?.score}}
+    <table mat-table [dataSource]="ds">
+        <ng-container matColumnDef="upvote">
+            <!-- <th mat-header-cell *matHeaderCellDef> No. </th> -->
+            <td mat-cell *matCellDef="let element">
+                <div class="m-20">
+                    {{element.score}}
                 </div>
-                <div class="story" [fxFlex]="paginated[i]?.type!='job' ? 70:85" >
-                    <div *ngIf="paginated[i]?.title">
+            <td>
+        </ng-container>
+        <ng-container matColumnDef="story">
+            <!-- <th mat-header-cell *matHeaderCellDef> No. </th> -->
+            <td mat-cell *matCellDef="let element">
+                <div class="story">
+                    <div *ngIf="element.title">
                         <span class="story-title">
-                            <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon>  -->
-                            {{paginated[i]?.title}}
+                            {{element.title}}
                         </span>
-                        <div class="story-url cursor-pointer" target="_blank" (click)="open(paginated[i]?.url)">{{paginated[i]?.url}}
+                        <div class="story-url cursor-pointer" target="_blank" (click)="open(element.url)">
+                            {{element.url}}
                         </div>
-                    </div>
-                    <div>
-                        <div class="story-info">
-                            <button class="text-left justify-content-start" mat-flat-button routerLink="/user/{{paginated[i]?.by}}">
-                                {{paginated[i]?.by.trim()}}
-                            </button>
-                            <span> {{getTime(paginated[i]?.time)}} </span>
-                        </div>
+                        <button class="text-left justify-content-start" mat-flat-button
+                            routerLink="/user/{{element.by}}">
+                            {{element.by.trim()}}
+                        </button>
                     </div>
                 </div>
-                <div *ngIf="paginated[i]?.type!='job'" class="m-20c cursor-pointer" fxFlex="15">
-                    <div routerLink="/story/{{paginated[i]?.id}}">
-                        <div>
-                            <mat-icon>mode_comment</mat-icon>
-                        </div>
-                        <div>{{paginated[i]?.descendants}} </div>
-                    </div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="time">
+            <!-- <th mat-header-cell *matHeaderCellDef> No. </th> -->
+            <td mat-cell *matCellDef="let element;index as i">
+                <div class="story-info">
+                    <span> {{getTime(element.time)}} </span>
                 </div>
-            </div>
-            <div *ngIf="!paginated[i]?.title">
-                <div class="skeleton skeleton-text"></div>
-                <div>
-                    <div class="skeleton skeleton-text"></div>
-                    <div class="skeleton skeleton-text"></div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="comments">
+            <!-- <th mat-header-cell *matHeaderCellDef> No. </th> -->
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.type!='job'" class="m-20c cursor-pointer">
+                    <button mat-icon-button [disabled]="element.descendants==0" routerLink="/story/{{element.id}}">
+                        <mat-icon>mode_comment</mat-icon>
+                    </button>
+                    <div [ngClass]="{'disabled-text':element.descendants==0}">{{element.descendants}} </div>
                 </div>
-                <div>
-                    <div class="skeleton skeleton-text"></div>
-                </div>
-            </div>
-        </mat-expansion-panel>
-        <mat-divider *ngIf="!l"></mat-divider>
-    </mat-accordion>
-    <mat-paginator paginator [length]="topStories.length" [pageSize]="20" (page)="onPageChange($event)"
-        showFirstLastButtons="true" aria-label="Select page">
+            </td>
+        </ng-container>
+
+        <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator paginator [pageSize]="20" showFirstLastButtons="true" aria-label="Select page">
     </mat-paginator>
+    <ng-component *ngIf="paginated.length==0">
+        No Table data
+    </ng-component>
 </mat-card>
+
+<!-- <mat-accordion *ngFor="let story of paginatedData;index as i;last as l">
+    <mat-expansion-panel hideToggle expanded="true">
+        <div class="row-center">
+            <div class="m-20" fxFlex="15">
+                {{element.score}}
+            </div>
+            <div class="story" [fxFlex]="element.type!='job' ? 70:85">
+                <div *ngIf="element.title">
+                    <span class="story-title">
+                        {{element.title}}
+                    </span>
+                    <div class="story-url cursor-pointer" target="_blank" (click)="open(element.url)">
+                        {{element.url}}
+                    </div>
+                </div>
+                <div>
+                    <div class="story-info">
+                        <button class="text-left justify-content-start" mat-flat-button
+                            routerLink="/user/{{element.by}}">
+                            {{element.by.trim()}}
+                        </button>
+                        <span> {{getTime(element.time)}} </span>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="element.type!='job'" class="m-20c cursor-pointer" fxFlex="15">
+                <button mat-icon-button [disabled]="element.descendants==0"
+                    routerLink="/story/{{element.id}}">
+                    <mat-icon>mode_comment</mat-icon>
+                </button>
+                <div [ngClass]="{'disabled-text':element.descendants==0}">{{element.descendants}} </div>
+            </div>
+        </div>
+        <div *ngIf="!element.title">
+            <div class="skeleton skeleton-text"></div>
+            <div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+            </div>
+            <div>
+                <div class="skeleton skeleton-text"></div>
+            </div>
+        </div>
+    </mat-expansion-panel>
+    <mat-divider *ngIf="!l"></mat-divider>
+</mat-accordion> -->
