@@ -1,27 +1,51 @@
-// import { NgModule } from '@angular/core';
-// import { BrowserModule } from '@angular/platform-browser';
-// import { AppRoutingModule } from './app-routing.module';
-// import { AppComponent } from './app.component';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { FlexLayoutModule } from '@angular/flex-layout';
-// import { CoreModule } from './material/core.module';
-// import { APIService } from './services/api.service';
-// import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { CoreModule } from './core.module';
+import { APIService } from './services/api.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CommentsComponent } from './components/comments/comments.component';
+import { StoryComponent } from './components/story/story.component';
+import { UserComponent } from './components/user/user.component';
+import { MultiModeViewComponent } from './components/multi-mode-view/multi-mode-view.component';
+import { HeadingComponent } from './components/heading/heading.component';
+import { RouterModule } from '@angular/router';
+import { LandingComponent } from './components/landing/landing.component';
+import { LoaderService } from './services/loader.service';
+import { LoaderInterceptor } from './interceptor/loader.interceptor';
 
 
-// @NgModule({
-//   declarations: [
-//     AppComponent,
-//   ],
-//   imports: [
-//     BrowserModule,
-//     HttpClientModule,
-//     AppRoutingModule,
-//     BrowserAnimationsModule,
-//     FlexLayoutModule,
-//     CoreModule,
-//   ],
-//   providers: [APIService],
-//   bootstrap: [AppComponent]
-// })
-// export class AppModule { }
+@NgModule({
+  declarations: [
+    AppComponent,
+    CommentsComponent,
+    StoryComponent,
+    UserComponent,
+    MultiModeViewComponent,
+    HeadingComponent,
+    LandingComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    CoreModule,
+    RouterModule
+  ],
+  providers: [
+    APIService,
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+  constructor() {
+    console.log('APP')
+  }
+}

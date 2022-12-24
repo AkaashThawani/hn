@@ -1,17 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
-import { RouterLink } from '@angular/router';
-import { HeadingComponent } from '../heading/heading.component';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+
 
 @Component({
   selector: 'app-comments',
-  standalone:true,
-  imports:[
-    CommonModule,
-    MatExpansionModule,
-    RouterLink,
-  ],
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.scss']
 })

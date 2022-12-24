@@ -1,26 +1,10 @@
-import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
-import { CommentsComponent } from '../comments/comments.component';
-import { HeadingComponent } from '../heading/heading.component';
+
 
 @Component({
   selector: 'app-story',
-  standalone: true,
-  imports: [
-    HeadingComponent,
-    RouterLink,
-    RouterLinkActive,
-    MatCardModule,
-    NgIf,
-    CommentsComponent,
-    MatButtonModule,
-    FlexLayoutModule
-  ],
   templateUrl: './story.component.html',
   styleUrls: ['./story.component.scss']
 })

@@ -1,20 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule } from '@angular/material/button';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { Router} from '@angular/router';
+import { Subject } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-heading',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    RouterLink,
-    RouterLinkActive,
-    FlexLayoutModule,
-    // BrowserAnimationsModule
-  ],
   templateUrl: './heading.component.html',
   styleUrls: ['./heading.component.scss'],
   animations: [
@@ -27,8 +18,10 @@ import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/rou
     )]
 })
 export class HeadingComponent implements OnInit {
-
-  constructor(private router: Router) { }
+  isLoading: Subject<boolean> = new Subject<boolean>()
+  constructor(private router: Router,private loaderService: LoaderService) { 
+    this.isLoading= this.loaderService.isLoading;
+  }
 
   ngOnInit(): void {
     console.log(window.location)
@@ -37,5 +30,7 @@ export class HeadingComponent implements OnInit {
   goto(route: string) {
     this.router.navigateByUrl(route)
   }
+  
+
 
 }

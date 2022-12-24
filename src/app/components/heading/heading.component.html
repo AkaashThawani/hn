@@ -1,8 +1,12 @@
-<div class="title" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayout.lt-sm="column wrap" fxLayoutAlign.lt-sm="start center" fxLayoutGap.lt-sm="10px">
+<div class="title" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayout.lt-sm="column wrap"
+    fxLayoutAlign.lt-sm="start center" fxLayoutGap.lt-sm="10px">
     <span class="title-text ticon text-center" routerLink="/news">HN</span>
     <span class="categories">
-        <button  mat-flat-button class="primary-btn" routerLink="/ask" routerLinkActive="rActive">Ask</button> 
-        <button  mat-flat-button class="primary-btn" routerLink="/show" routerLinkActive="rActive">Show</button> 
-        <button  mat-flat-button class="primary-btn" routerLink="/jobs" routerLinkActive="rActive">Jobs</button> 
+        <button mat-flat-button class="primary-btn" routerLink="/ask" routerLinkActive="rActive">Ask</button>
+        <button mat-flat-button class="primary-btn" routerLink="/show" routerLinkActive="rActive">Show</button>
+        <button mat-flat-button class="primary-btn" routerLink="/jobs" routerLinkActive="rActive">Jobs</button>
     </span>
 </div>
+<mat-progress-bar *ngIf="isLoading | async" mode="indeterminate">
+    wow
+</mat-progress-bar>

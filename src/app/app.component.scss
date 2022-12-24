@@ -235,3 +235,7 @@ button {
 .text-left {
     text-align: left !important;
 }
+
+.mat-progress-bar-fill:after{
+    background-color: red !important;
+}

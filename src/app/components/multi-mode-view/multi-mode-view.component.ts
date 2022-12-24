@@ -1,13 +1,6 @@
-import { NgFor, NgForOf, NgIf } from '@angular/common';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCard, MatCardModule } from '@angular/material/card';
-import { MatDivider, MatDividerModule } from '@angular/material/divider';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
-import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { APIService } from 'src/app/services/api.service';
 import { HeadingComponent } from '../heading/heading.component';
@@ -15,20 +8,6 @@ import { HeadingComponent } from '../heading/heading.component';
 
 @Component({
   selector: 'app-multi-mode-view',
-  standalone:true,
-  imports:[
-    NgFor,
-    NgIf,
-    MatDividerModule,
-    RouterLink,
-    MatButtonModule,
-    MatExpansionModule,
-    MatCardModule,
-    HeadingComponent,
-    MatIconModule,
-    MatPaginatorModule,
-    FlexLayoutModule,
-  ],
   templateUrl: './multi-mode-view.component.html',
   styleUrls: ['./multi-mode-view.component.scss'],
 })
@@ -45,8 +24,7 @@ export class MultiModeViewComponent implements OnInit {
   viewMode: string = '';
 
   constructor(private apiService: APIService, private activatedRoute: ActivatedRoute, private router: Router) {
-    // this.router.onSameUrlNavigation='reload'
-    // this.router.navigated=false
+   
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 

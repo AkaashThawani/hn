@@ -1,19 +1,9 @@
-import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
-import { HeadingComponent } from '../heading/heading.component';
 
 @Component({
   selector: 'app-user',
-  standalone:true,
-  imports:[
-    HeadingComponent,
-    NgIf,
-    RouterLink,
-    FlexLayoutModule,
-  ],
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })

@@ -1,22 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
-import { Component, ViewEncapsulation } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
-import { LandingComponent } from './components/landing/landing.component';
-// import { AppRoutingModule } from './app-routing.module';
-// import { APIService } from './services/api.service';
+import { Component, ViewEncapsulation } from "@angular/core";
+import { Router } from "@angular/router";
+
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    LandingComponent,
-    RouterModule,
-    HttpClientModule,
-  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None
