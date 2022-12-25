@@ -45,11 +45,11 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
   }
 
 
-  // onPageChange(event: PageEvent) {
-  //   this.paginatedData = this.topStories.slice(event.pageIndex * 20, (event.pageIndex + 1) * 20);
-  //   this.paginated = [];
-  //   this.getStoryData()
-  // }
+  onPageChange(event: PageEvent) {
+    this.paginatedData = this.topStories.slice(event.pageIndex+1 * 10, (event.pageIndex + 2) * 10);
+    this.getStoryData(this.paginatedData)
+    console.log(event)
+  }
 
 
 
@@ -57,14 +57,16 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
     this.apiService.modeType(mode).subscribe((res: any) => {
       res = res.map((obj: any, index: number) => ({ 'id': obj, 'index': index + 1, 'data': [] }))
       this.topStories = res;
-      // this.paginatedData = this.topStories.slice(0, 20)
-      this.getStoryData();
+      var temp = this.topStories.slice(0, 20)
+      this.getStoryData(temp);
     })
   }
 
 
-  getStoryData() {
-    this.topStories.forEach((element: any) => {
+  getStoryData(tempDs:any) {
+    // var tempDS = this.topStories.splice(0,20)
+    tempDs.forEach((element: any) => {
+      console.log(element.index)
       this.getStoriesByIDs(element.id)
     });
   }
@@ -78,7 +80,7 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
         }
       })
       this.ds.data = this.topStories;
-      console.log(this.topStories)
+      // console.log(this.topStories)
     })
   }
 

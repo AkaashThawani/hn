@@ -1,8 +1,8 @@
 <app-heading class="sticky"></app-heading>
 <div class="page">
     <mat-card class="story">
-        <div class="p-15" fxLayout="row wrap" fxLayoutAlign="start center">
-            <div class="m-20" fxFlex="15">{{storyData.score}}</div>
+        <div class="p-15" fxLayout="row nowrap" fxLayoutAlign="start center">
+            <div class="m-20s" fxFlex="15">{{storyData.score}}</div>
             <div fxFlex>
                 <span class="story-title bold">{{storyData?.title}}</span>
                 <div *ngIf="storyData?.text" [innerHTML]="storyData.text"></div>
