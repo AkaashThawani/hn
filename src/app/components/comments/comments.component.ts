@@ -9,6 +9,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 export class CommentsComponent implements OnInit {
 
   @Input() data: any[] = [];
+  @Input() expand :boolean = true;
   @ViewChild("", { static: false }) span!: Element;
   next:any
 

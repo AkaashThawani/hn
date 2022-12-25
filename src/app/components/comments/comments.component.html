@@ -15,19 +15,22 @@
     </div>
 </div> -->
 <mat-accordion accordion *ngFor="let kidData of data;index as i;last as last">
-    <mat-expansion-panel hideToggle expanded="true" disabled="true" #mep="matExpansionPanel" class="comment" *ngIf="!kidData.deleted">
+    <mat-expansion-panel hideToggle [expanded]="expand" disabled="true" #mep="matExpansionPanel" class="comment"
+        *ngIf="!kidData.deleted">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 <span class="comment-info" [id]="kidData.id">
                     <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon> -->
-                    <a routerLink="/user/{{kidData.by}}">{{kidData?.by +' '}}</a> 
+                    <a routerLink="/user/{{kidData.by}}">{{kidData?.by +' '}}</a>
                     <span>{{ getTime(kidData?.time)}} | </span>
                     <span (click)="scrollToNext(data,i)" class="next" *ngIf="!last" matTooltip="Go to next">next</span>
                     <span>
-                        <span *ngIf="mep.expanded==true" (click)="mep.expanded=!mep.expanded" class="minimize" matTooltip="minimize"> [ - ] </span>
-                        <span *ngIf="mep.expanded==false" (click)="mep.expanded=!mep.expanded" class="minimize" matTooltip="expand">[ + ]</span>
-                    </span> 
-                    
+                        <span *ngIf="mep.expanded==true" (click)="mep.expanded=!mep.expanded" class="minimize"
+                            matTooltip="minimize"> [ - ] </span>
+                        <span *ngIf="mep.expanded==false" (click)="mep.expanded=!mep.expanded" class="minimize"
+                            matTooltip="expand">[ + ]</span>
+                    </span>
+
                 </span>
             </mat-panel-title>
         </mat-expansion-panel-header>
@@ -36,7 +39,7 @@
             <!-- <div class="comment-reply">reply</div> -->
         </div>
         <div *ngIf="kidData?.kidsData" class="sub-comments">
-            <app-comments [data]="kidData.kidsData"></app-comments>
+            <app-comments [data]="kidData.kidsData" [expand]="false"></app-comments>
         </div>
     </mat-expansion-panel>
 </mat-accordion>

@@ -15,9 +15,9 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
 
   topStories = []
   paginatedData: any = [];
-  paginated:any[] = [];
+  paginated: any[] = [];
   ds: MatTableDataSource<any> = new MatTableDataSource<any>();
-  displayedColumns: string[] = ['upvote', 'story', 'time', 'comments'];
+  displayedColumns: string[] = ['story'];
 
 
   @ViewChild(MatPaginator)
@@ -41,7 +41,7 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.ds.paginator = this.paginator;
-  
+
   }
 
 
@@ -55,7 +55,7 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
 
   getAPI(mode: string) {
     this.apiService.modeType(mode).subscribe((res: any) => {
-      res = res.map((obj: any, index: number) => ({ 'id': obj, 'index': index + 1 }))
+      res = res.map((obj: any, index: number) => ({ 'id': obj, 'index': index + 1, 'data': [] }))
       this.topStories = res;
       // this.paginatedData = this.topStories.slice(0, 20)
       this.getStoryData();
@@ -72,9 +72,13 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
 
   getStoriesByIDs(id: any) {
     this.apiService.getStoryById(id).subscribe((res) => {
-      this.paginated.push(res);
-      this.ds.data = this.paginated;
-      // console.log(this.paginated)
+      this.topStories.forEach((e: any) => {
+        if (e.id == id) {
+          e.data = res
+        }
+      })
+      this.ds.data = this.topStories;
+      console.log(this.topStories)
     })
   }
 

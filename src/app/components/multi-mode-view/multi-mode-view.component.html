@@ -1,57 +1,52 @@
 <app-heading class="sticky"></app-heading>
 <mat-card fxLayout="column nowrap" fxLayoutAlign="start stretch" class="page">
     <table mat-table [dataSource]="ds">
-        <ng-container matColumnDef="upvote">
-            <!-- <th mat-header-cell *matHeaderCellDef> No. </th> -->
-            <td mat-cell *matCellDef="let element">
-                <div class="m-20">
-                    {{element.score}}
-                </div>
-            <td>
-        </ng-container>
         <ng-container matColumnDef="story">
             <!-- <th mat-header-cell *matHeaderCellDef> No. </th> -->
             <td mat-cell *matCellDef="let element">
                 <div class="story">
-                    <div *ngIf="element.title">
+                    <div *ngIf="element.data.length!=0;else noData">
                         <span class="story-title">
-                            {{element.title}}
+                            <div fxFlex="85">
+                                {{element.data?.title}}
+                            </div>
+                            <div class="story-info" fxFlex="15">
+                                <div class="tr w100">{{getTime(element?.data.time)}}</div>
+                            </div>
                         </span>
-                        <div class="story-url cursor-pointer" target="_blank" (click)="open(element.url)">
-                            {{element.url}}
+                        <div class="story-url cursor-pointer" target="_blank" (click)="open(element?.data.url)">
+                            {{element.data.url}}
                         </div>
-                        <button class="text-left justify-content-start" mat-flat-button
-                            routerLink="/user/{{element.by}}">
-                            {{element.by.trim()}}
-                        </button>
+                        <div fxLayout="row nowrap" fxLayoutAlign="space-between center" fxLayoutGap="25px">
+                            <button fxFlex="35" class="text-left justify-content-start" mat-flat-button
+                                routerLink="/user/{{element?.data?.by}}">
+                                {{element.data.by.trim()}}
+                            </button>
+                            <div fxFlex="20" *ngIf="element.type!='job'" fxLayout="row wrap"
+                                fxLayoutAlign="space-between center" class="m-20c cursor-pointer">
+                                <button mat-flat-button [disabled]="element?.data?.descendants==0"
+                                    routerLink="/story/{{element.id}}">
+                                    {{element?.data?.descendants}} comments
+                                </button>
+                            </div>
+                            <div class="m-20" fxFlex="15">
+                                {{element?.data?.score}}
+                            </div>
+                        </div>
                     </div>
+                    <ng-template #noData>
+                        <div class="skeleton skeleton-text"></div>
+                        <div>
+                            <div class="skeleton skeleton-text"></div>
+                            <div class="skeleton skeleton-text"></div>
+                        </div>
+                    </ng-template>
                 </div>
             </td>
         </ng-container>
-        <ng-container matColumnDef="time">
-            <!-- <th mat-header-cell *matHeaderCellDef> No. </th> -->
-            <td mat-cell *matCellDef="let element;index as i">
-                <div class="story-info">
-                    <span> {{getTime(element.time)}} </span>
-                </div>
-            </td>
-        </ng-container>
-        <ng-container matColumnDef="comments">
-            <!-- <th mat-header-cell *matHeaderCellDef> No. </th> -->
-            <td mat-cell *matCellDef="let element">
-                <div *ngIf="element.type!='job'" class="m-20c cursor-pointer">
-                    <button mat-icon-button [disabled]="element.descendants==0" routerLink="/story/{{element.id}}">
-                        <mat-icon>mode_comment</mat-icon>
-                    </button>
-                    <div [ngClass]="{'disabled-text':element.descendants==0}">{{element.descendants}} </div>
-                </div>
-            </td>
-        </ng-container>
-
-        <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator paginator [pageSize]="20" showFirstLastButtons="true" aria-label="Select page">
+    <mat-paginator paginator [pageSize]="10" showFirstLastButtons="true" aria-label="Select page">
     </mat-paginator>
     <ng-component *ngIf="paginated.length==0">
         No Table data
