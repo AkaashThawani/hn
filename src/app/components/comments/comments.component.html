@@ -24,12 +24,12 @@
                 <!-- <div class="comment-reply">reply</div> -->
             </div>
             <div *ngIf="kidData.data?.kids" class="sub-comments">
-                <app-comments [data]="kidData.data?.kids" [expand]="false"></app-comments>
+                <app-comments [data]="kidData.data?.kids" [expand]="true"></app-comments>
             </div>
         </mat-expansion-panel>
         <ng-template #nokidData>
             <div class="skeleton skeleton-text"></div>
-            <!-- <div class="skeleton skeleton-text"></div> -->
+            <div class="skeleton skeleton-text"></div>
             <div>
                 <div class="skeleton skeleton-text"></div>
                 <div class="skeleton skeleton-text"></div>

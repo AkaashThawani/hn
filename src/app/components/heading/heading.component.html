@@ -7,6 +7,9 @@
         <button mat-flat-button class="primary-btn" routerLink="/jobs" routerLinkActive="rActive">Jobs</button>
     </span>
 </div>
-<mat-progress-bar *ngIf="isLoading | async" mode="indeterminate">
+<mat-progress-bar *ngIf="isLoading | async;else noLoader" mode="indeterminate">
     wow
 </mat-progress-bar>
+<ng-template  #noLoader>
+    <div style="height: 4px;"></div>
+</ng-template>
