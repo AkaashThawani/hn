@@ -15,11 +15,11 @@
     </div>
 </div> -->
 <mat-accordion accordion *ngFor="let kidData of data;index as i;last as last">
-    <mat-expansion-panel hideToggle [expanded]="expand" disabled="true" #mep="matExpansionPanel" class="comment"
+    <mat-expansion-panel hideToggle [expanded]="expand" disabled="true"  [id]="kidData.id" #mep="matExpansionPanel" class="comment"
         *ngIf="!kidData.deleted">
         <mat-expansion-panel-header>
             <mat-panel-title>
-                <span class="comment-info" [id]="kidData.id">
+                <span class="comment-info">
                     <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon> -->
                     <a routerLink="/user/{{kidData.by}}">{{kidData?.by +' '}}</a>
                     <span>{{ getTime(kidData?.time)}} | </span>
@@ -39,7 +39,7 @@
             <!-- <div class="comment-reply">reply</div> -->
         </div>
         <div *ngIf="kidData?.kidsData" class="sub-comments">
-            <app-comments [data]="kidData.kidsData" [expand]="false"></app-comments>
+            <app-comments [data]="kidData.kidsData" [expand]="false" (removeBlo)="removeParentBlo($event)"></app-comments>
         </div>
     </mat-expansion-panel>
 </mat-accordion>

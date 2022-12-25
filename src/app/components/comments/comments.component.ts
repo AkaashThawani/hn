@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 
 @Component({
@@ -8,10 +8,12 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 })
 export class CommentsComponent implements OnInit {
 
+
   @Input() data: any[] = [];
-  @Input() expand :boolean = true;
+  @Input() expand: boolean = true;
+  @Output() removeBlo = new EventEmitter<boolean>;
   @ViewChild("", { static: false }) span!: Element;
-  next:any
+  @ViewChild("", { static: false }) next: HTMLElement | undefined;
 
   constructor() { }
 
@@ -19,21 +21,27 @@ export class CommentsComponent implements OnInit {
     this.sortCommentsOnTime();
   }
   scrollToNext(obj: any, index: number) {
-    if(this.next)
-    if (obj[index + 1]) {
-      this.next = document.getElementById(obj[index + 1].id)
-      this.next?.classList.add('blo');
-      this.next?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }else{
-      // console.log('parent scroll trig')
-      this.scrollToParentNext(obj[index].parent)
+    if (!this.expand) {
+      this.removeBlo.emit(true)
     }
-    // console.log(obj)
+    if (this.next) {
+      console.log('prev=>', this.next)
+      this.next.classList.remove('blo')
+    }
+    if (obj[index + 1]) {
+      this.next = document.getElementById(obj[index + 1].id) ?? undefined
+      console.log('current =>', this.next)
+      this.next?.classList.add('blo');
+      setTimeout(()=>{
+        this.next?.classList.add('blo-remove')
+      },2000)
+      this.next?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
   }
 
-  scrollToParentNext(parentId:any){
-    // console.log(parentId)
-    }
+  removeParentBlo(event:any){
+
+  }
 
   sortCommentsOnTime() {
     this.data.sort(({ time: a }, { time: b }) => a > b ? 1 : a < b ? -1 : 0)
@@ -42,10 +50,10 @@ export class CommentsComponent implements OnInit {
     var currentDateAndTime = new Date().getTime();
     var k: any = new Date(time * 1000).getTime();
     if (currentDateAndTime - k <= 3600000) {
-      return new Date(currentDateAndTime - k ).getUTCMinutes() + ' minutes';
+      return new Date(currentDateAndTime - k).getUTCMinutes() + ' minutes';
     }
     else {
-      return new Date(currentDateAndTime - k ).getUTCHours() + ' hours';
+      return new Date(currentDateAndTime - k).getUTCHours() + ' hours';
     }
   }
 

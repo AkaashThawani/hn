@@ -8,7 +8,13 @@
 }
 
 .blo{
-    border-left: #ff8c00 5px solid
+    border-left: #ff8c00 5px solid;
+    transition:all 1s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.blo-remove{
+    border-left: #ff8c00 0px solid ;
+    transition:all 1s cubic-bezier(0.18, 0.89, 0.32, 1.28) ;
 }
 
 @media screen and (max-width:900px){

@@ -46,7 +46,7 @@
         </ng-container>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator (page)="onPageChange($event)" paginator [pageSize]="10" showFirstLastButtons="true" aria-label="Select page">
+    <mat-paginator (page)="onPageChange($event)" [length]="topStories.length" paginator [pageSize]="10" showFirstLastButtons="true" aria-label="Select page">
     </mat-paginator>
     <ng-template #noDatas>
         <div>Loading....</div>
@@ -136,50 +136,3 @@
         </div>
     </ng-template>
 </mat-card>
-
-<!-- <mat-accordion *ngFor="let story of paginatedData;index as i;last as l">
-    <mat-expansion-panel hideToggle expanded="true">
-        <div class="row-center">
-            <div class="m-20" fxFlex="15">
-                {{element.score}}
-            </div>
-            <div class="story" [fxFlex]="element.type!='job' ? 70:85">
-                <div *ngIf="element.title">
-                    <span class="story-title">
-                        {{element.title}}
-                    </span>
-                    <div class="story-url cursor-pointer" target="_blank" (click)="open(element.url)">
-                        {{element.url}}
-                    </div>
-                </div>
-                <div>
-                    <div class="story-info">
-                        <button class="text-left justify-content-start" mat-flat-button
-                            routerLink="/user/{{element.by}}">
-                            {{element.by.trim()}}
-                        </button>
-                        <span> {{getTime(element.time)}} </span>
-                    </div>
-                </div>
-            </div>
-            <div *ngIf="element.type!='job'" class="m-20c cursor-pointer" fxFlex="15">
-                <button mat-icon-button [disabled]="element.descendants==0"
-                    routerLink="/story/{{element.id}}">
-                    <mat-icon>mode_comment</mat-icon>
-                </button>
-                <div [ngClass]="{'disabled-text':element.descendants==0}">{{element.descendants}} </div>
-            </div>
-        </div>
-        <div *ngIf="!element.title">
-            <div class="skeleton skeleton-text"></div>
-            <div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-            </div>
-            <div>
-                <div class="skeleton skeleton-text"></div>
-            </div>
-        </div>
-    </mat-expansion-panel>
-    <mat-divider *ngIf="!l"></mat-divider>
-</mat-accordion> -->
