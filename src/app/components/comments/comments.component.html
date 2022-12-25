@@ -14,16 +14,16 @@
         <app-comments [data]="kidData.kidsData"></app-comments>
     </div>
 </div> -->
-<mat-accordion accordion *ngFor="let kidData of data;index as i;last as last">
-    <mat-expansion-panel hideToggle [expanded]="expand" disabled="true"  [id]="kidData.id" #mep="matExpansionPanel" class="comment"
-        *ngIf="!kidData.deleted">
+<mat-accordion accordion *ngFor="let kidData of kidsArrayData;index as i;last as last">
+    <mat-expansion-panel hideToggle [expanded]="expand" disabled="true" [id]="kidData.id" #mep="matExpansionPanel"
+        class="comment" *ngIf="!kidData.deleted">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 <span class="comment-info">
                     <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon> -->
                     <a routerLink="/user/{{kidData.by}}">{{kidData?.by +' '}}</a>
                     <span>{{ getTime(kidData?.time)}} | </span>
-                    <span (click)="scrollToNext(data,i)" class="next" *ngIf="!last" matTooltip="Go to next">next</span>
+                    <span (click)="scrollToNext(kidsArrayData,i)" class="next" *ngIf="!last" matTooltip="Go to next">next</span>
                     <span>
                         <span *ngIf="mep.expanded==true" (click)="mep.expanded=!mep.expanded" class="minimize"
                             matTooltip="minimize"> [ - ] </span>
@@ -38,12 +38,12 @@
             <div class="comment-text" [innerHTML]="kidData?.text"></div>
             <!-- <div class="comment-reply">reply</div> -->
         </div>
-        <div *ngIf="kidData?.kidsData" class="sub-comments">
-            <app-comments [data]="kidData.kidsData" [expand]="false" (removeBlo)="removeParentBlo($event)"></app-comments>
+        <div *ngIf="kidData?.kids" class="sub-comments">
+            <app-comments [data]="kidData?.kids" [expand]="false"></app-comments>
         </div>
     </mat-expansion-panel>
 </mat-accordion>
-<div *ngIf="data.length==0">
+<div *ngIf="data?.length==0">
     <div class="skeleton skeleton-text"></div>
     <div class="skeleton skeleton-text"></div>
     <div>

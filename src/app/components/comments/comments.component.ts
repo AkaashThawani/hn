@@ -1,4 +1,5 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { APIService } from '../../services/api.service';
 
 
 @Component({
@@ -9,21 +10,41 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 export class CommentsComponent implements OnInit {
 
 
-  @Input() data: any[] = [];
+  @Input() data: any[]=[];
   @Input() expand: boolean = true;
   @Output() removeBlo = new EventEmitter<boolean>;
   @ViewChild("", { static: false }) span!: Element;
   @ViewChild("", { static: false }) next: HTMLElement | undefined;
+  kidsArray: any[] = [];
+  kidsArrayData: any[] = [];
+  myData: any[] = [];
 
-  constructor() { }
+  constructor(private apiService: APIService) {
+
+  }
+
 
   ngOnInit(): void {
-    this.sortCommentsOnTime();
+    this.myData = this.data;
+    this.getKidsData();
   }
+
+  ngAfterViewInit(){
+    this.sortCommentsOnTime()
+  }
+
+  getKidsData() {
+    this.kidsArray = this.data;
+    this.kidsArray.forEach((kid) => {
+      this.apiService.getCommentById(kid).subscribe((res2: any) => {
+        this.kidsArrayData.push(res2);
+          // console.log(this.kidsArrayData)
+      })
+    })
+  }
+
+
   scrollToNext(obj: any, index: number) {
-    if (!this.expand) {
-      this.removeBlo.emit(true)
-    }
     if (this.next) {
       console.log('prev=>', this.next)
       this.next.classList.remove('blo')
@@ -32,19 +53,12 @@ export class CommentsComponent implements OnInit {
       this.next = document.getElementById(obj[index + 1].id) ?? undefined
       console.log('current =>', this.next)
       this.next?.classList.add('blo');
-      setTimeout(()=>{
-        this.next?.classList.add('blo-remove')
-      },2000)
       this.next?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
 
-  removeParentBlo(event:any){
-
-  }
-
   sortCommentsOnTime() {
-    this.data.sort(({ time: a }, { time: b }) => a > b ? 1 : a < b ? -1 : 0)
+    this.kidsArrayData.sort(({ time: a }, { time: b }) => a > b ? 1 : a < b ? -1 : 0)
   }
   getTime(time: number) {
     var currentDateAndTime = new Date().getTime();

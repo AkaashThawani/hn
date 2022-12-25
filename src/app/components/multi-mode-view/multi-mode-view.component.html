@@ -22,7 +22,7 @@
                                 routerLink="/user/{{element?.data?.by}}">
                                 {{element.data.by.trim()}}
                             </button>
-                            <div fxFlex="20" *ngIf="element.type!='job'" fxLayout="row wrap"
+                            <div fxFlex="20" *ngIf="element.data.type!='job'" fxLayout="row wrap"
                                 fxLayoutAlign="space-between center" class="m-20c cursor-pointer">
                                 <button class="bg-none" mat-flat-button [disabled]="element?.data?.descendants==0"
                                     routerLink="/story/{{element.id}}">
@@ -46,7 +46,8 @@
         </ng-container>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator (page)="onPageChange($event)" [length]="topStories.length" paginator [pageSize]="10" showFirstLastButtons="true" aria-label="Select page">
+    <mat-paginator (page)="onPageChange($event)" [length]="topStories.length" paginator [pageSize]="10"
+        showFirstLastButtons="true" aria-label="Select page">
     </mat-paginator>
     <ng-template #noDatas>
         <div>Loading....</div>

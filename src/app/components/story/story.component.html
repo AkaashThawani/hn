@@ -8,7 +8,8 @@
                 <div *ngIf="storyData?.text" [innerHTML]="storyData.text"></div>
                 <div class="story-url" (click)="open(storyData?.url)">{{storyData?.url}}</div>
                 <div class="story-info">
-                    <button class="text-left justify-content-start" mat-flat-button routerLink="/user/{{storyData?.by}}">{{storyData?.by}}
+                    <button class="text-left justify-content-start" mat-flat-button
+                        routerLink="/user/{{storyData?.by}}">{{storyData?.by}}
                     </button>
                     <div> {{storyData?.descendants}} comments </div>
                     <div> {{getTime(storyData.time)}} </div>
@@ -16,7 +17,8 @@
             </div>
         </div>
     </mat-card>
-    <div style="margin-top:10px ;" fxLayout="column nowrap" fxLayoutAlign="start stretch" fxLayoutGap="15px">
-        <app-comments [data]="kidsArrayData"></app-comments>
+    <div *ngIf="kidsArray.length!=0" style="margin-top:10px ;" fxLayout="column nowrap" fxLayoutAlign="start stretch"
+        fxLayoutGap="15px">
+        <app-comments [data]="kidsArray"></app-comments>
     </div>
 </div>

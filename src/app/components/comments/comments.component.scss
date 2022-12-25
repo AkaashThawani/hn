@@ -1,28 +1,59 @@
 .comment-info {
     display: flex;
     flex-direction: row;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     justify-content: start;
     align-items: center;
     gap: 4px;
 }
 
-.blo{
-    border-left: #ff8c00 5px solid;
-    transition:all 1s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+.blo {
+    animation-name: addBL;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-direction: normal;
 }
 
-.blo-remove{
-    border-left: #ff8c00 0px solid ;
-    transition:all 1s cubic-bezier(0.18, 0.89, 0.32, 1.28) ;
+@keyframes addBL {
+    0% {
+        border-left: #ff8c00 0px solid;
+        box-shadow: 0px;
+    }
+
+    25% {
+        border-left: #ff8c00 2.5px solid;
+        box-shadow: 1.5px;
+    }
+
+    50% {
+        border-left: #ff8c00 5px solid;
+        box-shadow: 3px;
+    }
+
+    75% {
+        border-left: #ff8c00 2.5px solid;
+        box-shadow: 1.5px;
+    }
+
+    100% {
+        border-left: #ff8c00 0px solid;
+        box-shadow: 0px;
+    }
+
 }
 
-@media screen and (max-width:900px){
-    .sub-comments{
+// .blo-remove {
+//     border-left: #ff8c00 0px solid;
+//     transition: all 1s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+// }
+
+@media screen and (max-width:900px) {
+    .sub-comments {
         margin-left: 5px;
     }
 }
 
-.sub-comments{
+.sub-comments {
     margin-left: 12px;
 }
