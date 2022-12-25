@@ -7,7 +7,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Router, ActivationEnd, ActivationStart } from '@angular/router';
+import { Router, ActivationStart } from '@angular/router';
 import { HttpCancelService } from './http-cancel.service';
 import { takeUntil } from 'rxjs/operators';
 

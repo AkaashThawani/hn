@@ -8,10 +8,10 @@ export class LoaderService {
     isLoading = new Subject<boolean>();
     show() {
         this.isLoading.next(true);
-        console.log("show")
+        // console.log("show")
     }
     hide() {
         this.isLoading.next(false);
-        console.log("hide")
+        // console.log("hide")
     }
 }
