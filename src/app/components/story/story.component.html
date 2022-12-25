@@ -12,13 +12,13 @@
                         routerLink="/user/{{storyData?.by}}">{{storyData?.by}}
                     </button>
                     <div> {{storyData?.descendants}} comments </div>
-                    <div> {{getTime(storyData.time)}} </div>
+                    <div> {{storyData.time}} </div>
                 </div>
             </div>
         </div>
     </mat-card>
-    <div *ngIf="kidsArray.length!=0;else ske" style="margin-top:10px ;" fxLayout="column nowrap" fxLayoutAlign="start stretch"
-        fxLayoutGap="15px">
+    <div *ngIf="kidsArray.length!=0;else ske" style="margin-top:10px ;" fxLayout="column nowrap"
+        fxLayoutAlign="start stretch" fxLayoutGap="15px">
         <app-comments [data]="kidsArray"></app-comments>
     </div>
     <ng-template #ske>

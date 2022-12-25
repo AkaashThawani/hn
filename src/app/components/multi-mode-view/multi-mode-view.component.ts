@@ -41,7 +41,7 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.ds.paginator = this.paginator;
-
+    this.getTime()
   }
 
 
@@ -87,15 +87,17 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
     })
   }
 
-  getTime(time: number) {
-    var currentDateAndTime = new Date().getTime();
-    var k: any = new Date(time * 1000).getTime();
-    if (currentDateAndTime - k <= 3600000) {
-      return new Date(currentDateAndTime - k).getUTCMinutes() + ' minutes';
-    }
-    else {
-      return new Date(currentDateAndTime - k).getUTCHours() + ' hours';
-    }
+  getTime() {
+    this.paginatedData.forEach((e:any) => {
+      var currentDateAndTime = new Date().getTime();
+      var k: any = new Date(e.data.time * 1000).getTime();
+      if (currentDateAndTime - k <= 3600000) {
+        e.data.time = new Date(currentDateAndTime - k).getUTCMinutes() + ' minutes';
+      }
+      else {
+        e.data.time = new Date(currentDateAndTime - k).getUTCHours() + ' hours';
+      }
+    })
   }
 
   open(url: any) {
