@@ -15,7 +15,7 @@ import { HeadingComponent } from './components/heading/heading.component';
 import { RouterModule } from '@angular/router';
 import { LandingComponent } from './components/landing/landing.component';
 import { LoaderService } from './services/loader.service';
-import { LoaderInterceptor } from './interceptor/loader.interceptor';
+import { LoaderInterceptor } from './interceptor/loader.interceptor'
 import { ManageHttpInterceptor } from './services/http-interceptor.service';
 import { HttpCancelService } from './services/http-cancel.service';
 
@@ -50,6 +50,6 @@ import { HttpCancelService } from './services/http-cancel.service';
 })
 export class AppModule {
   constructor() {
-    console.log('APP')
+    // console.log('APP')
   }
 }

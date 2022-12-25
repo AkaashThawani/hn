@@ -16,7 +16,7 @@ export class AppComponent {
     if (this.afterRefresh == '/') {
       this.afterRefresh = 'news'
     }
-    console.log(this.afterRefresh)
+    // console.log(this.afterRefresh)
     this.router.navigate([this.afterRefresh])
   }
 }

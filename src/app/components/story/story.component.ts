@@ -25,7 +25,7 @@ export class StoryComponent implements OnInit {
     this.apiService.getStoryById(this.storyId).subscribe((res: any) => {
       this.storyData = res;
       this.kidsArray = this.storyData.kids;
-      console.log(this.storyData.kids)
+      // console.log(this.storyData.kids)
       // this.getKidsData();
     })
   }

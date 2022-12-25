@@ -1,9 +1,9 @@
-<!-- <app-heading class="sticky"></app-heading>
+<app-heading class="sticky"></app-heading>
 <mat-card fxLayout="column nowrap" fxLayoutAlign="start stretch" class="page">
-    <table mat-table [dataSource]="ds" *ngIf="topStories.length > 0 ;else noDatas">
+    <table mat-table [dataSource]="ds"  [trackBy]="tableTrackBy" *ngIf="ds.data.length > 0">
         <ng-container matColumnDef="story">
             <td mat-cell *matCellDef="let element">
-                <div class="story" *ngIf="element.data.length!=0;else noData">
+                <div class="story" *ngIf="element?.data?.length!=0;else noData">
                     <div>
                         <span class="story-title">
                             <div fxFlex="85">
@@ -39,7 +39,9 @@
                     <div>
                         <div class="skeleton skeleton-text"></div>
                         <div class="skeleton skeleton-text"></div>
+                        <!-- <div class="skeleton skeleton-text"></div> -->
                     </div>
+                    <div class="skeleton skeleton-text"></div>
                 </ng-template>
             </td>
         </ng-container>
@@ -48,56 +50,11 @@
     <mat-paginator (page)="onPageChange($event)" [length]="topStories.length" paginator [pageSize]="10"
         showFirstLastButtons="true" aria-label="Select page">
     </mat-paginator>
-    <ng-template #noDatas>
-        <div>Loading....</div>
-        <div>
-            <div class="skeleton skeleton-text"></div>
-            <div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-            </div>
-        </div>
-        <div>
-            <div class="skeleton skeleton-text"></div>
-            <div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-            </div>
-        </div>
-        <div>
-            <div class="skeleton skeleton-text"></div>
-            <div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-            </div>
-        </div>
-        <div>
-            <div class="skeleton skeleton-text"></div>
-            <div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-            </div>
-        </div>
-        <div>
-            <div class="skeleton skeleton-text"></div>
-            <div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-            </div>
-        </div>
-        <div>
-            <div class="skeleton skeleton-text"></div>
-            <div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-            </div>
-        </div>
-    </ng-template>
-</mat-card> -->
-<div>
+</mat-card>
+<!-- <div>
     <div class="skeleton skeleton-text"></div>
     <div>
         <div class="skeleton skeleton-text"></div>
         <div class="skeleton skeleton-text"></div>
     </div>
-</div>
+</div> -->

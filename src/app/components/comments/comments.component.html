@@ -1,21 +1,21 @@
 <ng-template #data>
-    <mat-accordion accordion *ngFor="let kidData of kidsArray;index as i;last as last">
+    <mat-accordion accordion *ngFor="let kidData of kidsArray;index as i;last as last;trackBy:kidTrackBy">
         <mat-expansion-panel hideToggle [expanded]="expand" disabled="true" [id]="kidData.data.id"
             #mep="matExpansionPanel" class="comment" *ngIf="!kidData.data.deleted">
             <mat-expansion-panel-header *ngIf="kidData.data.length != 0;else nokidData">
                 <mat-panel-title>
                     <span class="comment-info">
                         <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon> -->
-                        <a routerLink="/user/{{kidData.data.by}}">{{kidData.data?.by +' '}}</a>
-                        <span>{{ getTime(kidData.data?.time)}} | </span>
+                        <a (click)="goToUser(kidData?.data?.by)">{{kidData.data?.by +' '}}</a>
+                        <span>{{ kidData.data?.time}} | </span>
                         <span (click)="scrollToNext(kidsArrayData,i)" class="next" *ngIf="!last"
                             matTooltip="Go to next">next</span>
                         <span>
-                            <span *ngIf="mep.expanded==true" (click)="mep.expanded=!mep.expanded" class="minimize"
-                                matTooltip="minimize"> [ - ] </span>
-                            <span *ngIf="mep.expanded==false" (click)="mep.expanded=!mep.expanded" class="minimize"
-                                matTooltip="expand">[ + ]</span>
-                        </span>
+                            <span *ngIf="mep.expanded==true" (click)="expandR()" class="minimize"
+                                matTooltip="minimize"></span>
+                            [ - ] </span>
+                        <span *ngIf="mep.expanded==false" (click)="expandR()" class="minimize" matTooltip="expand">[
+                            + ]</span>
                     </span>
                 </mat-panel-title>
             </mat-expansion-panel-header>
@@ -30,14 +30,22 @@
         <ng-template #nokidData>
             <div class="skeleton skeleton-text"></div>
             <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
             <div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
                 <div class="skeleton skeleton-text"></div>
                 <div class="skeleton skeleton-text"></div>
             </div>
             <div>
                 <div class="skeleton skeleton-text"></div>
                 <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
             </div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
             <div class="skeleton skeleton-text"></div>
             <div class="skeleton skeleton-text"></div>
         </ng-template>

@@ -16,7 +16,7 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
   topStories = []
   paginatedData: any = [];
   paginated: any[] = [];
-  ds: MatTableDataSource<any> = new MatTableDataSource<any>();
+  ds: MatTableDataSource<any> = new MatTableDataSource<any>([{data:[]},{data:[]},{data:[]},{data:[]},{data:[]},{data:[]},{data:[]},{data:[]},{data:[]},{data:[]},{data:[]}]);
   displayedColumns: string[] = ['story'];
 
 
@@ -64,11 +64,14 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
 
 
   getStoryData(tempDs:any) {
-    console.log(tempDs)
+    // console.log(tempDs)
     tempDs.forEach((element: any) => {
-      console.log(element.index)
+      // console.log(element.index)
       this.getStoriesByIDs(element.id)
     });
+  }
+  tableTrackBy(index:number,data:any):string{
+    return data.id;
   }
 
 
