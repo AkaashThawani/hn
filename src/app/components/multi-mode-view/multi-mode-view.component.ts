@@ -46,7 +46,7 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
 
 
   onPageChange(event: PageEvent) {
-    this.paginatedData = this.topStories.slice(event.pageIndex+1 * 10, (event.pageIndex + 2) * 10);
+    this.paginatedData = this.topStories.slice(event.pageIndex+1 * 10, (event.pageIndex + 2) * 1);
     this.getStoryData(this.paginatedData)
     console.log(event)
   }

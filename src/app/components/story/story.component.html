@@ -3,7 +3,7 @@
     <mat-card class="story">
         <div class="p-15" fxLayout="row nowrap" fxLayoutAlign="start center">
             <div class="m-20s" fxFlex="15">{{storyData.score}}</div>
-            <div fxFlex>
+            <div fxLayout="column wrap" fxFlex>
                 <span class="story-title bold">{{storyData?.title}}</span>
                 <div *ngIf="storyData?.text" [innerHTML]="storyData.text"></div>
                 <div class="story-url" (click)="open(storyData?.url)">{{storyData?.url}}</div>
