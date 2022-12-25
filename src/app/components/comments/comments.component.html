@@ -1,49 +1,47 @@
-<!-- <div class="comment" *ngFor="let kidData of data;index as i">
-    <div *ngIf="!kidData.deleted">
-        <span class="comment-info">
-            <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon>
-            <a routerLink="/user/{{kidData.by}}">{{kidData?.by +' '}}</a> <a>{{ getTime(kidData?.time)}}</a> |
-            next
-        </span>
-        <div class="comment-body">
-            <div class="comment-text" [innerHTML]="kidData?.text"></div>
-            <div class="comment-reply">reply</div>
-        </div>
-    </div>
-    <div *ngIf="kidData?.kidsData" style="margin-left: 30px;">
-        <app-comments [data]="kidData.kidsData"></app-comments>
-    </div>
-</div> -->
-<mat-accordion accordion *ngFor="let kidData of kidsArrayData;index as i;last as last">
-    <mat-expansion-panel hideToggle [expanded]="expand" disabled="true" [id]="kidData.id" #mep="matExpansionPanel"
-        class="comment" *ngIf="!kidData.deleted">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                <span class="comment-info">
-                    <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon> -->
-                    <a routerLink="/user/{{kidData.by}}">{{kidData?.by +' '}}</a>
-                    <span>{{ getTime(kidData?.time)}} | </span>
-                    <span (click)="scrollToNext(kidsArrayData,i)" class="next" *ngIf="!last" matTooltip="Go to next">next</span>
-                    <span>
-                        <span *ngIf="mep.expanded==true" (click)="mep.expanded=!mep.expanded" class="minimize"
-                            matTooltip="minimize"> [ - ] </span>
-                        <span *ngIf="mep.expanded==false" (click)="mep.expanded=!mep.expanded" class="minimize"
-                            matTooltip="expand">[ + ]</span>
+<ng-template #data>
+    <mat-accordion accordion *ngFor="let kidData of kidsArray;index as i;last as last">
+        <mat-expansion-panel hideToggle [expanded]="expand" disabled="true" [id]="kidData.data.id"
+            #mep="matExpansionPanel" class="comment" *ngIf="!kidData.data.deleted">
+            <mat-expansion-panel-header *ngIf="kidData.data.length != 0;else nokidData">
+                <mat-panel-title>
+                    <span class="comment-info">
+                        <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon> -->
+                        <a routerLink="/user/{{kidData.data.by}}">{{kidData.data?.by +' '}}</a>
+                        <span>{{ getTime(kidData.data?.time)}} | </span>
+                        <span (click)="scrollToNext(kidsArrayData,i)" class="next" *ngIf="!last"
+                            matTooltip="Go to next">next</span>
+                        <span>
+                            <span *ngIf="mep.expanded==true" (click)="mep.expanded=!mep.expanded" class="minimize"
+                                matTooltip="minimize"> [ - ] </span>
+                            <span *ngIf="mep.expanded==false" (click)="mep.expanded=!mep.expanded" class="minimize"
+                                matTooltip="expand">[ + ]</span>
+                        </span>
                     </span>
-
-                </span>
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="comment-body">
-            <div class="comment-text" [innerHTML]="kidData?.text"></div>
-            <!-- <div class="comment-reply">reply</div> -->
-        </div>
-        <div *ngIf="kidData?.kids" class="sub-comments">
-            <app-comments [data]="kidData?.kids" [expand]="false"></app-comments>
-        </div>
-    </mat-expansion-panel>
-</mat-accordion>
-<div *ngIf="data?.length==0">
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="comment-body">
+                <div class="comment-text" [innerHTML]="kidData.data?.text"></div>
+                <!-- <div class="comment-reply">reply</div> -->
+            </div>
+            <div *ngIf="kidData.data?.kids" class="sub-comments">
+                <app-comments [data]="kidData.data?.kids" [expand]="false"></app-comments>
+            </div>
+        </mat-expansion-panel>
+        <ng-template #nokidData>
+            <div class="skeleton skeleton-text"></div>
+            <!-- <div class="skeleton skeleton-text"></div> -->
+            <div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+            </div>
+            <div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+            </div>
+        </ng-template>
+    </mat-accordion>
+</ng-template>
+<div *ngIf="!kidsArrayData;else data">
     <div class="skeleton skeleton-text"></div>
     <div class="skeleton skeleton-text"></div>
     <div>

@@ -10,7 +10,7 @@ import { APIService } from '../../services/api.service';
 export class CommentsComponent implements OnInit {
 
 
-  @Input() data: any[]=[];
+  @Input() data: any[] = [];
   @Input() expand: boolean = true;
   @Output() removeBlo = new EventEmitter<boolean>;
   @ViewChild("", { static: false }) span!: Element;
@@ -29,16 +29,17 @@ export class CommentsComponent implements OnInit {
     this.getKidsData();
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.sortCommentsOnTime()
   }
 
   getKidsData() {
-    this.kidsArray = this.data;
-    this.kidsArray.forEach((kid) => {
-      this.apiService.getCommentById(kid).subscribe((res2: any) => {
-        this.kidsArrayData.push(res2);
-          // console.log(this.kidsArrayData)
+    this.kidsArray = this.data.map(e => ({ 'id': e, 'data': [] }));
+    this.kidsArray.forEach((kid, index) => {
+      this.apiService.getCommentById(kid.id).subscribe((res2: any) => {
+        // console.log(this.kidsArray[index].data)
+        this.kidsArray[index].data = res2;
+        // console.log(this.kidsArray[index])
       })
     })
   }
@@ -46,12 +47,12 @@ export class CommentsComponent implements OnInit {
 
   scrollToNext(obj: any, index: number) {
     if (this.next) {
-      console.log('prev=>', this.next)
+      // console.log('prev=>', this.next)
       this.next.classList.remove('blo')
     }
     if (obj[index + 1]) {
       this.next = document.getElementById(obj[index + 1].id) ?? undefined
-      console.log('current =>', this.next)
+      // console.log('current =>', this.next)
       this.next?.classList.add('blo');
       this.next?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
