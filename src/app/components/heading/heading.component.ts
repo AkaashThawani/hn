@@ -5,17 +5,17 @@ import { Subject } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
-  selector: 'app-heading',
-  templateUrl: './heading.component.html',
-  styleUrls: ['./heading.component.scss'],
-  animations: [
-    trigger('fade',
-      [
-        state('void', style({ opacity: 0 })),
-        transition(':enter', [animate(300)]),
-        transition(':leave', [animate(500)]),
-      ]
-    )]
+    selector: 'app-heading',
+    templateUrl: './heading.component.html',
+    styleUrls: ['./heading.component.scss'],
+    animations: [
+        trigger('fade', [
+            state('void', style({ opacity: 0 })),
+            transition(':enter', [animate(300)]),
+            transition(':leave', [animate(500)]),
+        ])
+    ],
+    standalone: false
 })
 export class HeadingComponent implements OnInit {
   isLoading: Subject<boolean> = new Subject<boolean>()

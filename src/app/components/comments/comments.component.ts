@@ -5,9 +5,10 @@ import { APIService } from '../../services/api.service';
 
 
 @Component({
-  selector: 'app-comments',
-  templateUrl: './comments.component.html',
-  styleUrls: ['./comments.component.scss'],
+    selector: 'app-comments',
+    templateUrl: './comments.component.html',
+    styleUrls: ['./comments.component.scss'],
+    standalone: false
 })
 export class CommentsComponent implements OnInit {
 

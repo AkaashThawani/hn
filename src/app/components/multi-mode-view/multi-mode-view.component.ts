@@ -7,9 +7,10 @@ import { APIService } from 'src/app/services/api.service';
 
 
 @Component({
-  selector: 'app-multi-mode-view',
-  templateUrl: './multi-mode-view.component.html',
-  styleUrls: ['./multi-mode-view.component.scss'],
+    selector: 'app-multi-mode-view',
+    templateUrl: './multi-mode-view.component.html',
+    styleUrls: ['./multi-mode-view.component.scss'],
+    standalone: false
 })
 export class MultiModeViewComponent implements OnInit, AfterViewInit {
 

@@ -4,9 +4,10 @@ import { APIService } from 'src/app/services/api.service';
 
 
 @Component({
-  selector: 'app-story',
-  templateUrl: './story.component.html',
-  styleUrls: ['./story.component.scss']
+    selector: 'app-story',
+    templateUrl: './story.component.html',
+    styleUrls: ['./story.component.scss'],
+    standalone: false
 })
 export class StoryComponent implements OnInit {
 
