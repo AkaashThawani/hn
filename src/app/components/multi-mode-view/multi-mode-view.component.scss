@@ -30,3 +30,49 @@
 .w100{
     width: 100%;
 }
+
+:host ::ng-deep {
+  // Target the mat-card itself to make it grow
+  .mat-mdc-card {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; // This makes the card fill the remaining vertical space
+  }
+
+  // Target the actual rendered rows in the material table
+  .mat-mdc-row {
+    height: 6rem; // A fixed height for each real story row (96px)
+    border-bottom: 1px solid #e5e7eb; // A light border to separate rows
+  }
+}
+
+// Styles for our new placeholder
+.skeleton-container {
+  padding: 0 1.5rem; // Match the padding of mat-table cells
+}
+
+.skeleton-row {
+  height: 6rem; // EXACTLY THE SAME HEIGHT as the real rows. This is the key to preventing CLS.
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid #e5e7eb; // Also has a matching border
+}
+
+// A generic skeleton element style you probably already have
+.skeleton {
+  background-color: #e5e7eb;
+  border-radius: 0.25rem;
+  // A pulsing animation makes the skeleton feel more alive
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeleton-text {
+  height: 0.875rem; // 14px
+}
+
+@keyframes pulse {
+  50% {
+    opacity: .5;
+  }
+}

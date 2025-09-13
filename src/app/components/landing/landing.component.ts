@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -10,6 +11,7 @@ import { RouterModule } from '@angular/router';
     imports: [
     CommonModule,
     RouterModule,
+    MatProgressBarModule
   ],
 })
 export class LandingComponent {

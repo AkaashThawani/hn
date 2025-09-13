@@ -1,3 +1,15 @@
-<div class="content">
-    <router-outlet></router-outlet>
+<div class="content w-full min-h-screen flex flex-col">
+    @defer (on immediate) {
+    <main class="flex-grow"> <!-- This is the content area that will contain your page -->
+        <router-outlet></router-outlet>
+    </main>
+    } @placeholder {
+    <!-- Show this simple placeholder while the router and its component are loading -->
+    <div class="skeleton skeleton-text"></div>
+    <div class="skeleton skeleton-text"></div>
+    } @loading {
+    <!-- Optional: Show a loading spinner -->
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    }
 </div>
+

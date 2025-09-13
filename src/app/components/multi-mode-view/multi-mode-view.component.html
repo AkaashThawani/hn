@@ -1,57 +1,72 @@
 <app-heading class="sticky"></app-heading>
 <mat-card appearance="outlined" class="page flex flex-col flex-nowrap items-stretch justify-start">
+
+  @defer (on idle) {
   @if (ds.data.length > 0) {
-    <table mat-table [dataSource]="ds" class="w100" [trackBy]="tableTrackBy">
-      <ng-container matColumnDef="story">
-        <td mat-cell *matCellDef="let element">
-          @if (element?.data?.length!=0) {
-            <div class="story">
-              <div>
-                <span class="story-title flex">
-                  <div class="flex-basis-[85%]">
-                    {{element.data?.title}}
-                  </div>
-                  <div class="story-info flex-basis-[15%]">
-                    <div class="tr w100">{{element?.data.time}}</div>
-                  </div>
-                </span>
-                <div class="story-url cursor-pointer" target="_blank" (click)="open(element?.data.url)">
-                  {{element.data.url}}
-                </div>
-                <div class="flex flex-row flex-nowrap items-center justify-between gap-[25px]">
-                  <button class="flex-basis-[35%] text-left justify-start" mat-flat-button
-                    routerLink="/user/{{element?.data?.by}}">
-                    {{element.data.by.trim()}}
-                  </button>
-                  @if (element.data.type!='job') {
-                    <div
-                      class="m-20c flex-basis-[20%] cursor-pointer flex flex-row flex-wrap items-center justify-between">
-                      <button class="bg-none" mat-flat-button [disabled]="element?.data?.descendants==0"
-                        routerLink="/story/{{element.id}}">
-                        {{element?.data?.descendants}} comments
-                      </button>
-                    </div>
-                  }
-                  <div class="m-20 flex-basis-[15%]">
-                    {{element?.data?.score}}
-                  </div>
-                </div>
+  <table mat-table [dataSource]="ds" class="w100" [trackBy]="tableTrackBy">
+    <ng-container matColumnDef="story">
+      <td mat-cell *matCellDef="let element">
+        <div class="story">
+          <div>
+            <span class="story-title flex">
+              <div class="flex-basis-[85%]">
+                {{element.data?.title}}
+              </div>
+              <div class="story-info flex-basis-[15%]">
+                <div class="tr w100">{{element?.data.time}}</div>
+              </div>
+            </span>
+            <div class="story-url cursor-pointer" target="_blank" (click)="open(element?.data.url)">
+              {{element.data.url}}
+            </div>
+            <div class="story-meta flex w-full items-center pt-2">
+              <!-- Column 1: Author Name -->
+              <div class="w-2/5">
+                <button mat-flat-button routerLink="/user/{{element?.data?.by}}" class="text-left justify-start p-0">
+                  {{element.data.by.trim()}}
+                </button>
+              </div>
+              <!-- Column 2: Comments Count -->
+              <div class="w-3/12 text-center">
+                @if (element.data.type!='job') {
+                <button mat-flat-button [disabled]="element?.data?.descendants==0" routerLink="/story/{{element.id}}"
+                  class="bg-none">
+                  {{element?.data?.descendants}} comments
+                </button>
+                }
+              </div>
+              <!-- Column 3: Score -->
+              <div class="flex-grow text-right pr-4">
+                <span>{{element?.data?.score}} points</span>
               </div>
             </div>
-          } @else {
-            <div class="skeleton skeleton-text"></div>
-            <div>
-              <div class="skeleton skeleton-text"></div>
-              <div class="skeleton skeleton-text"></div>
-            </div>
-            <div class="skeleton skeleton-text"></div>
-          }
-        </td>
-      </ng-container>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
   }
   <mat-paginator (page)="onPageChange($event)" [length]="topStories.length" paginator [pageSize]="10"
     showFirstLastButtons="true" aria-label="Select page">
   </mat-paginator>
+
+  } @placeholder {
+  <!-- This is what the user sees instantly. We will style this to prevent layout shift. -->
+  <div class="skeleton-container">
+    @for (item of [1,2,3,4,5,6,7,8,9,10]; track $index) {
+    <div class="skeleton-row">
+      <div class="skeleton skeleton-text w-5/6"></div>
+      <div class="skeleton skeleton-text w-full mt-2"></div>
+      <div class="flex mt-4">
+        <div class="skeleton skeleton-text w-1/4"></div>
+        <div class="skeleton skeleton-text w-1/4 ml-4"></div>
+      </div>
+    </div>
+    }
+  </div>
+  } @loading {
+  <!-- Optional: Show a loading bar while the deferred content is downloaded -->
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
 </mat-card>

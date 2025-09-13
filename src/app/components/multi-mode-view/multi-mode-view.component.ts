@@ -7,6 +7,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 // import { Observable } from 'rxjs';
 import { APIService } from 'src/app/services/api.service';
 import { HeadingComponent } from '../heading/heading.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @Component({
@@ -21,6 +22,7 @@ import { HeadingComponent } from '../heading/heading.component';
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
+    MatProgressBarModule
   ],
 })
 export class MultiModeViewComponent implements OnInit, AfterViewInit {

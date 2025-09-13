@@ -2,16 +2,15 @@
 <div class="page">
   <mat-card appearance="outlined" class="story">
     <div class="p-15 flex flex-row flex-nowrap items-center justify-start">
-      <div class="m-20s flex-basis-[15%]">{{storyData.score}}</div>
+      <div class="flex-basis-[15%]">{{storyData.score}}</div>
       <div class="flex flex-1 flex-col flex-wrap">
         <span class="story-title bold">{{storyData?.title}}</span>
         @if (storyData?.text) {
-          <div [innerHTML]="storyData.text"></div>
+        <div [innerHTML]="storyData.text"></div>
         }
         <div class="story-url" (click)="open(storyData?.url)">{{storyData?.url}}</div>
         <div class="story-info">
-          <button class="text-left justify-start" mat-flat-button
-            routerLink="/user/{{storyData?.by}}">{{storyData?.by}}
+          <button class="text-left justify-start" mat-flat-button routerLink="/user/{{storyData?.by}}">{{storyData?.by}}
           </button>
           <div> {{storyData?.descendants}} comments </div>
           <div> {{storyData.time}} </div>
@@ -21,81 +20,80 @@
   </mat-card>
 
   @if (kidsArray.length!=0) {
-    <div style="margin-top:10px ;"
-      class="flex flex-col flex-nowrap items-stretch justify-start gap-[15px]">
-      <app-comments [data]="kidsArray"></app-comments>
-    </div>
+  <div style="margin-top:10px ;" class="flex flex-col flex-nowrap items-stretch justify-start gap-[15px]">
+    <app-comments [data]="kidsArray"></app-comments>
+  </div>
   } @else {
+  <div class="skeleton skeleton-text"></div>
+  <div class="skeleton skeleton-text"></div>
+  <div>
     <div class="skeleton skeleton-text"></div>
     <div class="skeleton skeleton-text"></div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
+  </div>
+  <div>
     <div class="skeleton skeleton-text"></div>
     <div class="skeleton skeleton-text"></div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
+  </div>
+  <div class="skeleton skeleton-text"></div>
+  <div class="skeleton skeleton-text"></div>
+  <div>
     <div class="skeleton skeleton-text"></div>
     <div class="skeleton skeleton-text"></div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
+  </div>
+  <div>
     <div class="skeleton skeleton-text"></div>
     <div class="skeleton skeleton-text"></div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
+  </div>
+  <div class="skeleton skeleton-text"></div>
+  <div class="skeleton skeleton-text"></div>
+  <div>
     <div class="skeleton skeleton-text"></div>
     <div class="skeleton skeleton-text"></div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
+  </div>
+  <div>
     <div class="skeleton skeleton-text"></div>
     <div class="skeleton skeleton-text"></div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
+  </div>
+  <div class="skeleton skeleton-text"></div>
+  <div class="skeleton skeleton-text"></div>
+  <div>
     <div class="skeleton skeleton-text"></div>
     <div class="skeleton skeleton-text"></div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div class="skeleton skeleton-text"></div>
-    </div>
+  </div>
+  <div>
+    <div class="skeleton skeleton-text"></div>
+    <div class="skeleton skeleton-text"></div>
+  </div>
+  <div class="skeleton skeleton-text"></div>
+  <div class="skeleton skeleton-text"></div>
+  <div>
+    <div class="skeleton skeleton-text"></div>
+    <div class="skeleton skeleton-text"></div>
+  </div>
+  <div>
+    <div class="skeleton skeleton-text"></div>
+    <div class="skeleton skeleton-text"></div>
+  </div>
+  <div class="skeleton skeleton-text"></div>
+  <div class="skeleton skeleton-text"></div>
+  <div>
+    <div class="skeleton skeleton-text"></div>
+    <div class="skeleton skeleton-text"></div>
+  </div>
+  <div>
+    <div class="skeleton skeleton-text"></div>
+    <div class="skeleton skeleton-text"></div>
+  </div>
+  <div class="skeleton skeleton-text"></div>
+  <div class="skeleton skeleton-text"></div>
+  <div>
+    <div class="skeleton skeleton-text"></div>
+    <div class="skeleton skeleton-text"></div>
+  </div>
+  <div>
+    <div class="skeleton skeleton-text"></div>
+    <div class="skeleton skeleton-text"></div>
+  </div>
   }
 
 </div>
