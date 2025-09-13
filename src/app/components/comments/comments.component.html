@@ -1,5 +1,5 @@
-
-@if (!kidsArrayData) {
+@if (isLoading) {
+  <!-- Show a skeleton loader while the comments are being fetched -->
   <div>
     <div class="skeleton skeleton-text"></div>
     <div class="skeleton skeleton-text"></div>
@@ -13,61 +13,40 @@
     </div>
   </div>
 } @else {
-  @for (kidData of kidsArray; track kidTrackBy(i, kidData); let i = $index; let last = $last) {
-    <mat-accordion accordion>
-      @if (!kidData.data.deleted) {
-        <mat-expansion-panel hideToggle [expanded]="expand" disabled="true" [id]="kidData.data.id"
+  <!-- The accordion now correctly wraps the @for loop -->
+  <mat-accordion multi>
+    @for (kidData of kidsArray; track kidTrackBy($index, kidData); let i = $index; let last = $last) {
+      @if (kidData.data && !kidData.data.deleted) {
+        <mat-expansion-panel hideToggle [expanded]="expand" [id]="kidData.data.id"
           #mep="matExpansionPanel" class="comment">
-          @if (kidData.data.length != 0) {
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <span class="comment-info">
-                  <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon> -->
-                  <a (click)="goToUser(kidData?.data?.by)">{{kidData.data?.by +' '}}</a>
-                  <span>{{ kidData.data?.time}} | </span>
-                  @if (!last) {
-                    <span (click)="scrollToNext(kidsArrayData,i)" class="next"
-                    matTooltip="Go to next">next</span>
-                  }
-                  <span>
-                    @if (mep.expanded==true) {
-                      <span (click)="expandR()" class="minimize"
-                      matTooltip="minimize"></span>
-                    }
-                  [ - ] </span>
-                  @if (mep.expanded==false) {
-                    <span (click)="expandR()" class="minimize" matTooltip="expand">[
-                    + ]</span>
-                  }
-                </span>
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-          } @else {
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div>
-              <div class="skeleton skeleton-text"></div>
-              <div class="skeleton skeleton-text"></div>
-              <div class="skeleton skeleton-text"></div>
-              <div class="skeleton skeleton-text"></div>
-            </div>
-            <div>
-              <div class="skeleton skeleton-text"></div>
-              <div class="skeleton skeleton-text"></div>
-              <div class="skeleton skeleton-text"></div>
-              <div class="skeleton skeleton-text"></div>
-            </div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-          }
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span class="comment-info">
+                <a (click)="goToUser(kidData?.data?.by)">{{kidData.data?.by}}</a>
+                <!-- Use the new processedTime property -->
+                <span class="text-gray-500 pl-2">{{ kidData.data?.processedTime}}</span>
+              </span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
           <div class="comment-body">
             <div class="comment-text" [innerHTML]="kidData.data?.text"></div>
-            <!-- <div class="comment-reply">reply</div> -->
+            <!-- Action buttons are now part of the content, not the header -->
+            <div class="comment-actions flex items-center gap-4 pt-2 text-sm text-gray-500">
+              <!-- Pass the panel reference #mep directly to the function -->
+              <button (click)="expandR(mep)">
+                @if (mep.expanded) {
+                  <span>[ - ]</span>
+                } @else {
+                  <span>[ + ]</span>
+                }
+              </button>
+              @if (!last) {
+                <button (click)="scrollToNext(kidsArray, i)">[ -> ]</button>
+              }
+            </div>
           </div>
+
           @if (kidData.data?.kids) {
             <div class="sub-comments">
               <app-comments [data]="kidData.data?.kids" [expand]="true"></app-comments>
@@ -75,6 +54,6 @@
           }
         </mat-expansion-panel>
       }
-    </mat-accordion>
-  }
+    }
+  </mat-accordion>
 }

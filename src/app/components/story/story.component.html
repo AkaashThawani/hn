@@ -2,18 +2,20 @@
 <div class="page">
   <mat-card appearance="outlined" class="story">
     <div class="p-15 flex flex-row flex-nowrap items-center justify-start">
-      <div class="flex-basis-[15%]">{{storyData.score}}</div>
-      <div class="flex flex-1 flex-col flex-wrap">
+      <div class="p-4">{{storyData.score}}</div>
+      <div class="flex flex-1 flex-col flex-wrap p-2">
         <span class="story-title bold">{{storyData?.title}}</span>
         @if (storyData?.text) {
-        <div [innerHTML]="storyData.text"></div>
+          <div [innerHTML]="storyData.text"></div>
         }
         <div class="story-url" (click)="open(storyData?.url)">{{storyData?.url}}</div>
-        <div class="story-info">
-          <button class="text-left justify-start" mat-flat-button routerLink="/user/{{storyData?.by}}">{{storyData?.by}}
+        <!-- This container now has the flexbox classes -->
+        <div class="story-info flex items-center gap-4 pt-2">
+          <button class="text-left justify-start p-0" mat-flat-button routerLink="/user/{{storyData?.by}}">{{storyData?.by}}
           </button>
           <div> {{storyData?.descendants}} comments </div>
-          <div> {{storyData.time}} </div>
+          <!-- This now displays the processed time -->
+          <div> {{storyData.processedTime}} </div>
         </div>
       </div>
     </div>

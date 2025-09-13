@@ -1,29 +1,22 @@
-.info {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 50px;
-    justify-content: flex-start;
-    align-items: flex-start;
+// :host styles the component's host element (<app-user>)
+:host {
+  // Make the component a flex container so it can grow
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
 
-    div {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
+// The .user-card class is added to our mat-card in the HTML
+.user-card {
+  // Make the card a flex container that grows vertically
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  flex-grow: 1; // This is the most important part for filling the height
 
-    .label {
-        display: flex;
-        width: 6%;
-        font-weight: 300;
-    }
-    .extras{
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: stretch;
-        gap: 2px;
-        text-decoration: underline;
-        cursor: pointer;
-    }
+  // Use ::ng-deep to target the inner content area of the mat-card
+  ::ng-deep .mat-mdc-card-content {
+    // Make the content area grow, which pushes the actions to the bottom
+    flex-grow: 1;
+  }
 }

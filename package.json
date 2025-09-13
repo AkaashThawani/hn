@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "analyze": "ng build --stats-json && webpack-bundle-analyzer dist/hn/stats.json",
     "test": "ng test",
-    "deploy": "ng build --configuration=production && ngh --dir=dist/hn"
+    "deploy": "ng build --base-href=/hn/ && npx angular-cli-ghpages --dir=dist/hn/browser"
   },
   "private": true,
   "dependencies": {

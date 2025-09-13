@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { ActivatedRoute, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
 import { HeadingComponent } from '../heading/heading.component';
 import { CommentsComponent } from '../comments/comments.component';
-
+import { MatButtonModule } from '@angular/material/button'; // Import MatButtonModule
 
 @Component({
   selector: 'app-story',
@@ -18,18 +18,19 @@ import { CommentsComponent } from '../comments/comments.component';
     CommonModule,
     RouterModule,
     HeadingComponent,
+    CommentsComponent,
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
-    CommentsComponent 
+    MatButtonModule // Add MatButtonModule
   ],
 })
 export class StoryComponent implements OnInit {
 
   storyId: string = '';
-  storyData: any = [];
-  kidsArray = [];
-  kidsArrayData: any = [];
+  storyData: any = {}; // Initialize as an object
+  kidsArray: any[] = [];
+
   constructor(private activatedRoute: ActivatedRoute, private apiService: APIService) { }
 
   ngOnInit(): void {
@@ -39,36 +40,32 @@ export class StoryComponent implements OnInit {
 
   getStoryData() {
     this.apiService.getStoryById(this.storyId).subscribe((res: any) => {
+      // Process the time before assigning the data
+      res.processedTime = this.getTime(res.time);
       this.storyData = res;
-      this.kidsArray = this.storyData.kids;
-      // console.log(this.storyData.kids)
-      // this.getKidsData();
-    })
-  }
-
-  getKidsData() {
-    // this.kidsArray = this.storyData.kids;
-    // this.kidsArray.forEach((kid) => {
-    //   this.apiService.getCommentById(kid).subscribe((res2: any) => {
-    //     // var kidsData = this.getSubKids(res2);
-    //     this.kidsArrayData.push(res2);
-    //   })
-    // })
-    // console.log(this.kidsArrayData)
+      this.kidsArray = this.storyData.kids || []; // Ensure kidsArray is always an array
+    });
   }
 
   open(url: any) {
-    window.open(url, '_blank')
-  }
-  getTime(time: number) {
-    var currentDateAndTime = new Date().getTime();
-    var k: any = new Date(time * 1000).getTime();
-    if (currentDateAndTime - k <= 3600000) {
-      return new Date(currentDateAndTime - k).getUTCMinutes() + ' minutes';
-    }
-    else {
-      return new Date(currentDateAndTime - k).getUTCHours() + ' hours';
+    if (url) {
+      window.open(url, '_blank');
     }
   }
 
+  getTime(time: number): string {
+    const currentDate = new Date().getTime();
+    const storyDate = new Date(time * 1000).getTime();
+    const diff = currentDate - storyDate;
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(minutes / 60);
+
+    if (minutes < 1) {
+      return 'just now';
+    }
+    if (minutes < 60) {
+      return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    }
+    return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+  }
 }

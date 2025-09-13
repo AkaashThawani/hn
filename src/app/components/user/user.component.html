@@ -1,46 +1,59 @@
 <app-heading class="sticky"></app-heading>
-<div class="page">
+<div class="page p-4 sm:p-6 h-full">
+
   @if (userData?.id) {
-    <div fxLayout="column wrap" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <div class="info">
-        <div class="label">User</div>
-        <div>{{userData.id}}</div>
-      </div>
-      <div class="info">
-        <div class="label">Created</div>
-        <div>{{userData.created}}</div>
-      </div>
-      <div class="info">
-        <div class="label">Karma</div>
-        <div>{{userData.karma}}</div>
-      </div>
-      <div class="info">
-        <div class="label">About</div>
-        <div [innerHTML]="userData.about"></div>
-      </div>
-      <div class="info">
-        <div class="label"></div>
-        <div class="extras">
-          <div routerLink="/submissions/{{userData.id}}">Submissions</div>
-          <div routerLink="/comments/{{userData.id}}">Comments</div>
-          <div routerLink="/favorites/{{userData.id}}">Favorites</div>
+    <!-- The main mat-card container -->
+    <mat-card class="user-card">
+      <mat-card-header class="p-6">
+        <mat-card-title class="flex items-center gap-3">
+          <mat-icon>person</mat-icon>
+          <span class="text-2xl font-bold">{{userData.id}}</span>
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-content class="p-6">
+        <!-- A robust grid for the main info, replacing the old label/info divs -->
+        <div class="grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-x-6 gap-y-8">
+          <!-- Row 1: Joined -->
+          <div class="text-sm font-medium text-gray-500">Joined</div>
+          <div class="font-semibold">{{userData.createdDate}}</div>
+
+          <!-- Row 2: Karma -->
+          <div class="text-sm font-medium text-gray-500">Karma</div>
+          <div class="font-semibold">{{userData.karma}}</div>
         </div>
+
+        <!-- "About" section with a clear divider -->
+        @if (userData.about) {
+          <mat-divider class="my-6"></mat-divider>
+          <div>
+            <h3 class="text-lg font-semibold mb-2">About</h3>
+            <div class="prose max-w-none text-sm" [innerHTML]="userData.about"></div>
+          </div>
+        }
+      </mat-card-content>
+
+      <!-- Actions are pushed to the bottom by the flex-grow on mat-card-content -->
+      <mat-card-actions class="p-6 pt-0">
+        <a mat-stroked-button routerLink="/submissions/{{userData.id}}">Submissions</a>
+        <a mat-stroked-button routerLink="/comments/{{userData.id}}">Comments</a>
+        <a mat-stroked-button routerLink="/favorites/{{userData.id}}">Favorites</a>
+      </mat-card-actions>
+    </mat-card>
+
+  } @else {
+    <!-- The skeleton loader that matches the new structure -->
+    <div class="max-w-4xl mx-auto border rounded-lg p-6 animate-pulse">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full skeleton"></div>
+        <div class="w-1/3 h-6 skeleton skeleton-text"></div>
       </div>
-    </div>
-  }
-  @if (!userData?.id) {
-    <div>
-      <div class="skeleton skeleton-text"></div>
-      <div>
-        <div class="skeleton skeleton-text"></div>
-        <div class="skeleton skeleton-text"></div>
-      </div>
-      <div>
-        <div class="skeleton skeleton-text"></div>
-        <div class="skeleton skeleton-text"></div>
-        <div class="skeleton skeleton-text"></div>
-        <div class="skeleton skeleton-text"></div>
-        <div class="skeleton skeleton-text"></div>
+      <div class="mt-6 space-y-4">
+        <div class="w-full h-10 skeleton skeleton-text"></div>
+        <div class="w-full h-4 mt-4 skeleton skeleton-text"></div>
+        <div class="w-3/4 h-4 mt-2 skeleton skeleton-text"></div>
       </div>
     </div>
   }

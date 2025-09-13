@@ -1,121 +1,136 @@
-import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-// import { Observable } from 'rxjs';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { APIService } from 'src/app/services/api.service';
-import { HeadingComponent } from '../heading/heading.component';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 
+// --- Angular and Material Modules ---
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { HeadingComponent } from '../heading/heading.component';
 
 @Component({
-    selector: 'app-multi-mode-view',
-    templateUrl: './multi-mode-view.component.html',
-    styleUrls: ['./multi-mode-view.component.scss'],
-    standalone: true,
-    imports: [
-    CommonModule,
-    RouterModule,
-    HeadingComponent,
-    MatCardModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatProgressBarModule
+  selector: 'app-multi-mode-view',
+  templateUrl: './multi-mode-view.component.html',
+  styleUrls: ['./multi-mode-view.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule, RouterModule,HeadingComponent, MatCardModule,
+    MatTableModule, MatPaginatorModule, MatProgressBarModule
   ],
 })
-export class MultiModeViewComponent implements OnInit, AfterViewInit {
+export class MultiModeViewComponent implements OnInit {
 
-  topStories = []
-  paginatedData: any = [];
-  paginated: any[] = [];
-  ds: MatTableDataSource<any> = new MatTableDataSource<any>([{ data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }]);
+  // --- STATE MANAGEMENT ---
+  allStoryIds: number[] = [];
+  private storyCache = new Map<number, any>(); // Cache for fetched story data to prevent re-fetching
+
+  // The DataSource will only ever hold the 10 visible items
+  ds = new MatTableDataSource<any>([]);
   displayedColumns: string[] = ['story'];
+  isLoading = true; // Flag to control showing the skeleton loader
 
-
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-
-  viewMode: string = '';
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private apiService: APIService, private activatedRoute: ActivatedRoute, private router: Router) {
-
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
-
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((res: any) => {
-      this.viewMode = res.id
+    this.activatedRoute.params.subscribe((params: any) => {
+      // 1. Get the list of all 500 story IDs just once
+      this.apiService.modeType(params.id).subscribe((ids: number[]) => {
+        this.allStoryIds = ids;
+        // 2. Load the very first page of data
+        this.loadPage(0);
+      });
     });
-    this.getAPI(this.viewMode);
-
   }
 
-  ngAfterViewInit(): void {
-    this.ds.paginator = this.paginator;
-
-  }
-
-
+  // --- PAGINATION LOGIC ---
   onPageChange(event: PageEvent) {
-    this.paginatedData = this.topStories.slice(event.pageIndex + 1 * 10, (event.pageIndex + 2) * 10);
-    this.getStoryData(this.paginatedData)
-    // console.log([this.paginatedData])
+    this.loadPage(event.pageIndex);
   }
 
+  loadPage(pageIndex: number) {
+    this.isLoading = true;
+    this.ds.data = []; // Clear the table to ensure the skeleton shows
 
+    const pageSize = 10;
+    const startIndex = pageIndex * pageSize;
 
-  getAPI(mode: string) {
-    this.apiService.modeType(mode).subscribe((res: any) => {
-      res = res.map((obj: any, index: number) => ({ 'id': obj, 'index': index + 1, 'data': [] }))
-      this.topStories = res;
-      var temp = this.topStories.slice(0, 20)
-      this.getStoryData(temp);
-    })
-  }
+    // Get IDs for the current page and the NEXT page (for preloading)
+    const currentPageIds = this.allStoryIds.slice(startIndex, startIndex + pageSize);
+    const nextPageIds = this.allStoryIds.slice(startIndex + pageSize, startIndex + (2 * pageSize));
+    const idsToFetch = [...currentPageIds, ...nextPageIds];
 
+    // From the combined list, find which ones we don't already have in our cache
+    const idsNotInCache = idsToFetch.filter(id => !this.storyCache.has(id));
 
-  getStoryData(tempDs: any) {
-    // console.log(tempDs)
-    tempDs.forEach((element: any) => {
-      // console.log(element.index)
-      this.getStoriesByIDs(element.id)
+    // If all the stories for this page and the next are already cached, load instantly
+    if (idsNotInCache.length === 0) {
+      this.updateDataSourceFromCache(currentPageIds);
+      return;
+    }
+
+    // Create an array of API calls only for the stories we don't have
+    const apiCalls = idsNotInCache.map(id =>
+      this.apiService.getStoryById(id).pipe(
+        map(storyData => ({ id, data: storyData }))
+      )
+    );
+
+    // Run all required API calls in parallel
+    forkJoin(apiCalls).subscribe(newStories => {
+      // Add the newly fetched stories to our cache for future use
+      newStories.forEach(story => this.storyCache.set(story.id, story.data));
+      // Now, update the view with the data for the current page
+      this.updateDataSourceFromCache(currentPageIds);
     });
   }
-  tableTrackBy(index: number, data: any): string {
-    return data.id;
+
+  private updateDataSourceFromCache(pageIds: number[]) {
+    const pageData = pageIds.map(id => {
+      const data = this.storyCache.get(id);
+      // Process the time string right before displaying
+      if (data && !data.processedTime) {
+        data.processedTime = this.getTime(data);
+      }
+      return { id, data };
+    });
+
+    this.ds.data = pageData; // This will now be an array of exactly 10 items
+    this.isLoading = false; // Hide the skeleton, show the table
   }
 
+  // --- HELPER FUNCTIONS ---
+  getTime(e: any): string {
+    const currentDate = new Date().getTime();
+    const storyDate = new Date(e.time * 1000).getTime();
+    const diff = currentDate - storyDate;
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(minutes / 60);
 
-  getStoriesByIDs(id: any) {
-    this.apiService.getStoryById(id).subscribe((res) => {
-      this.topStories.forEach((e: any) => {
-        if (e.id == id) {
-          res.time = this.getTime(res)
-          e.data = res
-        }
-      })
-      this.ds.data = this.topStories;
-      // console.log(this.topStories)
-    })
-  }
-
-  getTime(e: any) {
-    var currentDateAndTime = new Date().getTime();
-    var k: any = new Date(e.time * 1000).getTime();
-    if (currentDateAndTime - k <= 3600000) {
-      return new Date(currentDateAndTime - k).getUTCMinutes() + ' minutes';
+    if (minutes < 60) {
+      return `${minutes} minutes ago`;
+    } else {
+      return `${hours} hours ago`;
     }
-    else {
-      return new Date(currentDateAndTime - k).getUTCHours() + ' hours';
+  }
+
+  open(url: any): void {
+    if (url) {
+      window.open(url, '_blank');
     }
-
   }
 
-  open(url: any) {
-    window.open(url, '_blank');
+  tableTrackBy(index: number, item: any): number {
+    return item.id;
   }
-
 }
