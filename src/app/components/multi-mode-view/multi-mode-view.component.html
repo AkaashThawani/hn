@@ -1,34 +1,34 @@
 <app-heading class="sticky"></app-heading>
-<mat-card fxLayout="column nowrap" fxLayoutAlign="start stretch" class="page">
-    <table mat-table [dataSource]="ds"  [trackBy]="tableTrackBy" *ngIf="ds.data.length > 0">
+<mat-card class="page flex flex-col flex-nowrap items-stretch justify-start">
+    <table mat-table [dataSource]="ds" class="w100" [trackBy]="tableTrackBy" *ngIf="ds.data.length > 0">
         <ng-container matColumnDef="story">
             <td mat-cell *matCellDef="let element">
                 <div class="story" *ngIf="element?.data?.length!=0;else noData">
                     <div>
-                        <span class="story-title">
-                            <div fxFlex="85">
+                        <span class="story-title flex">
+                            <div class="flex-basis-[85%]">
                                 {{element.data?.title}}
                             </div>
-                            <div class="story-info" fxFlex="15">
+                            <div class="story-info flex-basis-[15%]">
                                 <div class="tr w100">{{element?.data.time}}</div>
                             </div>
                         </span>
                         <div class="story-url cursor-pointer" target="_blank" (click)="open(element?.data.url)">
                             {{element.data.url}}
                         </div>
-                        <div fxLayout="row nowrap" fxLayoutAlign="space-between center" fxLayoutGap="25px">
-                            <button fxFlex="35" class="text-left justify-content-start" mat-flat-button
+                        <div class="flex flex-row flex-nowrap items-center justify-between gap-[25px]">
+                            <button class="flex-basis-[35%] text-left justify-start" mat-flat-button
                                 routerLink="/user/{{element?.data?.by}}">
                                 {{element.data.by.trim()}}
                             </button>
-                            <div fxFlex="20" *ngIf="element.data.type!='job'" fxLayout="row wrap"
-                                fxLayoutAlign="space-between center" class="m-20c cursor-pointer">
+                            <div *ngIf="element.data.type!='job'"
+                                class="m-20c flex-basis-[20%] cursor-pointer flex flex-row flex-wrap items-center justify-between">
                                 <button class="bg-none" mat-flat-button [disabled]="element?.data?.descendants==0"
                                     routerLink="/story/{{element.id}}">
                                     {{element?.data?.descendants}} comments
                                 </button>
                             </div>
-                            <div class="m-20" fxFlex="15">
+                            <div class="m-20 flex-basis-[15%]">
                                 {{element?.data?.score}}
                             </div>
                         </div>
@@ -39,10 +39,9 @@
                     <div>
                         <div class="skeleton skeleton-text"></div>
                         <div class="skeleton skeleton-text"></div>
-                        <!-- <div class="skeleton skeleton-text"></div> -->
                     </div>
                     <div class="skeleton skeleton-text"></div>
-                </ng-template>
+                  </ng-template>
             </td>
         </ng-container>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -51,10 +50,3 @@
         showFirstLastButtons="true" aria-label="Select page">
     </mat-paginator>
 </mat-card>
-<!-- <div>
-    <div class="skeleton skeleton-text"></div>
-    <div>
-        <div class="skeleton skeleton-text"></div>
-        <div class="skeleton skeleton-text"></div>
-    </div>
-</div> -->

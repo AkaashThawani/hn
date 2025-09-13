@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoreModule } from './core.module';
 import { APIService } from './services/api.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -35,7 +34,6 @@ import { HttpCancelService } from './services/http-cancel.service';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    FlexLayoutModule,
     CoreModule,
     RouterModule
   ],
@@ -50,6 +48,5 @@ import { HttpCancelService } from './services/http-cancel.service';
 })
 export class AppModule {
   constructor() {
-    // console.log('APP')
   }
 }

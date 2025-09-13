@@ -16,7 +16,7 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
   topStories = []
   paginatedData: any = [];
   paginated: any[] = [];
-  ds: MatTableDataSource<any> = new MatTableDataSource<any>([{data:[]},{data:[]},{data:[]},{data:[]},{data:[]},{data:[]},{data:[]},{data:[]},{data:[]},{data:[]},{data:[]}]);
+  ds: MatTableDataSource<any> = new MatTableDataSource<any>([{ data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }, { data: [] }]);
   displayedColumns: string[] = ['story'];
 
 
@@ -41,12 +41,12 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.ds.paginator = this.paginator;
-    this.getTime()
+
   }
 
 
   onPageChange(event: PageEvent) {
-    this.paginatedData = this.topStories.slice(event.pageIndex+1 * 10, (event.pageIndex + 2) * 10);
+    this.paginatedData = this.topStories.slice(event.pageIndex + 1 * 10, (event.pageIndex + 2) * 10);
     this.getStoryData(this.paginatedData)
     // console.log([this.paginatedData])
   }
@@ -63,14 +63,14 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
   }
 
 
-  getStoryData(tempDs:any) {
+  getStoryData(tempDs: any) {
     // console.log(tempDs)
     tempDs.forEach((element: any) => {
       // console.log(element.index)
       this.getStoriesByIDs(element.id)
     });
   }
-  tableTrackBy(index:number,data:any):string{
+  tableTrackBy(index: number, data: any): string {
     return data.id;
   }
 
@@ -79,6 +79,7 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
     this.apiService.getStoryById(id).subscribe((res) => {
       this.topStories.forEach((e: any) => {
         if (e.id == id) {
+          res.time = this.getTime(res)
           e.data = res
         }
       })
@@ -87,17 +88,16 @@ export class MultiModeViewComponent implements OnInit, AfterViewInit {
     })
   }
 
-  getTime() {
-    this.paginatedData.forEach((e:any) => {
-      var currentDateAndTime = new Date().getTime();
-      var k: any = new Date(e.data.time * 1000).getTime();
-      if (currentDateAndTime - k <= 3600000) {
-        e.data.time = new Date(currentDateAndTime - k).getUTCMinutes() + ' minutes';
-      }
-      else {
-        e.data.time = new Date(currentDateAndTime - k).getUTCHours() + ' hours';
-      }
-    })
+  getTime(e: any) {
+    var currentDateAndTime = new Date().getTime();
+    var k: any = new Date(e.time * 1000).getTime();
+    if (currentDateAndTime - k <= 3600000) {
+      return new Date(currentDateAndTime - k).getUTCMinutes() + ' minutes';
+    }
+    else {
+      return new Date(currentDateAndTime - k).getUTCHours() + ' hours';
+    }
+
   }
 
   open(url: any) {

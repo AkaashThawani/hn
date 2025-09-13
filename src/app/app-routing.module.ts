@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LandingComponent } from './components/landing/landing.component';
 import { MultiModeViewComponent } from './components/multi-mode-view/multi-mode-view.component';
 import { StoryComponent } from './components/story/story.component';
 import { UserComponent } from './components/user/user.component';
@@ -8,16 +7,16 @@ import { UserComponent } from './components/user/user.component';
 const routes: Routes = [
   {
     path: ':id',
-    component:MultiModeViewComponent
+    component: MultiModeViewComponent
     // loadComponent: () => import('./components/multi-mode-view/multi-mode-view.component').then(c => c.MultiModeViewComponent)
   },
   {
     path: 'story/:id',
-    component:StoryComponent
+    component: StoryComponent
     // loadComponent: () => import('./components/story/story.component').then(c => c.StoryComponent)
   }, {
     path: 'user/:id',
-    component:UserComponent
+    component: UserComponent
     // loadComponent: () => import('./components/user/user.component').then(c => c.UserComponent)
   },
 ];
