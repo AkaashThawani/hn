@@ -1,16 +1,27 @@
+import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 // import { Observable } from 'rxjs';
 import { APIService } from 'src/app/services/api.service';
+import { HeadingComponent } from '../heading/heading.component';
 
 
 @Component({
     selector: 'app-multi-mode-view',
     templateUrl: './multi-mode-view.component.html',
     styleUrls: ['./multi-mode-view.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [
+    CommonModule,
+    RouterModule,
+    HeadingComponent,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+  ],
 })
 export class MultiModeViewComponent implements OnInit, AfterViewInit {
 

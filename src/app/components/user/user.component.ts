@@ -1,12 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
+import { HeadingComponent } from '../heading/heading.component';
 
 @Component({
     selector: 'app-user',
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [
+    CommonModule,
+    RouterModule,
+    HeadingComponent,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+  ],
 })
 export class UserComponent implements OnInit {
 

@@ -1,13 +1,28 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { ActivatedRoute, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { APIService } from 'src/app/services/api.service';
+import { HeadingComponent } from '../heading/heading.component';
+import { CommentsComponent } from '../comments/comments.component';
 
 
 @Component({
-    selector: 'app-story',
-    templateUrl: './story.component.html',
-    styleUrls: ['./story.component.scss'],
-    standalone: false
+  selector: 'app-story',
+  templateUrl: './story.component.html',
+  styleUrls: ['./story.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    HeadingComponent,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    CommentsComponent 
+  ],
 })
 export class StoryComponent implements OnInit {
 

@@ -1,6 +1,8 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
+
+import { Router, RouterModule} from '@angular/router';
 import { Subject } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 
@@ -15,7 +17,11 @@ import { LoaderService } from 'src/app/services/loader.service';
             transition(':leave', [animate(500)]),
         ])
     ],
-    standalone: false
+    standalone: true,
+    imports: [
+    CommonModule,
+    RouterModule,
+  ],
 })
 export class HeadingComponent implements OnInit {
   isLoading: Subject<boolean> = new Subject<boolean>()

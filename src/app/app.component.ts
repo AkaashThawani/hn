@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from "@angular/core";
 import { Router } from "@angular/router";
+import { RouterOutlet } from "@angular/router";
+import { LandingComponent } from "./components/landing/landing.component";
 
 
 @Component({
@@ -7,7 +9,10 @@ import { Router } from "@angular/router";
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: false
+    standalone: true,
+    imports: [
+    LandingComponent,
+  ],
 })
 export class AppComponent {
   title = 'HackerNews';

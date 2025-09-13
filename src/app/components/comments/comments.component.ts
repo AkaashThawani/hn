@@ -1,14 +1,26 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { MatExpansionPanel } from '@angular/material/expansion';
-import { Router } from '@angular/router';
+import { MatAccordion, MatExpansionModule, MatExpansionPanel } from '@angular/material/expansion';
+import { Router, RouterModule } from '@angular/router';
 import { APIService } from '../../services/api.service';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
 
 @Component({
     selector: 'app-comments',
     templateUrl: './comments.component.html',
     styleUrls: ['./comments.component.scss'],
-    standalone: false
+    standalone: true,
+    imports: [
+    CommonModule,
+    RouterModule,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatExpansionModule
+  ],
 })
 export class CommentsComponent implements OnInit {
 
