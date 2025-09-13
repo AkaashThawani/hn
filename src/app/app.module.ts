@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core.module';
 import { APIService } from './services/api.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CommentsComponent } from './components/comments/comments.component';
 import { StoryComponent } from './components/story/story.component';
 import { UserComponent } from './components/user/user.component';
@@ -19,33 +19,27 @@ import { ManageHttpInterceptor } from './services/http-interceptor.service';
 import { HttpCancelService } from './services/http-cancel.service';
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    CommentsComponent,
-    StoryComponent,
-    UserComponent,
-    MultiModeViewComponent,
-    HeadingComponent,
-    LandingComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    CoreModule,
-    RouterModule
-  ],
-  providers: [
-    APIService,
-    LoaderService,
-    HttpCancelService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ManageHttpInterceptor, multi: true }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        CommentsComponent,
+        StoryComponent,
+        UserComponent,
+        MultiModeViewComponent,
+        HeadingComponent,
+        LandingComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        CoreModule,
+        RouterModule], providers: [
+        APIService,
+        LoaderService,
+        HttpCancelService,
+        { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ManageHttpInterceptor, multi: true },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {
   constructor() {
   }
