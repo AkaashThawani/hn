@@ -1,65 +1,80 @@
-<ng-template #data>
-    <mat-accordion accordion *ngFor="let kidData of kidsArray;index as i;last as last;trackBy:kidTrackBy">
+
+@if (!kidsArrayData) {
+  <div>
+    <div class="skeleton skeleton-text"></div>
+    <div class="skeleton skeleton-text"></div>
+    <div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text"></div>
+    </div>
+    <div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text"></div>
+    </div>
+  </div>
+} @else {
+  @for (kidData of kidsArray; track kidTrackBy(i, kidData); let i = $index; let last = $last) {
+    <mat-accordion accordion>
+      @if (!kidData.data.deleted) {
         <mat-expansion-panel hideToggle [expanded]="expand" disabled="true" [id]="kidData.data.id"
-            #mep="matExpansionPanel" class="comment" *ngIf="!kidData.data.deleted">
-            <mat-expansion-panel-header *ngIf="kidData.data.length != 0;else nokidData">
-                <mat-panel-title>
-                    <span class="comment-info">
-                        <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon> -->
-                        <a (click)="goToUser(kidData?.data?.by)">{{kidData.data?.by +' '}}</a>
-                        <span>{{ kidData.data?.time}} | </span>
-                        <span (click)="scrollToNext(kidsArrayData,i)" class="next" *ngIf="!last"
-                            matTooltip="Go to next">next</span>
-                        <span>
-                            <span *ngIf="mep.expanded==true" (click)="expandR()" class="minimize"
-                                matTooltip="minimize"></span>
-                            [ - ] </span>
-                        <span *ngIf="mep.expanded==false" (click)="expandR()" class="minimize" matTooltip="expand">[
-                            + ]</span>
-                    </span>
-                </mat-panel-title>
+          #mep="matExpansionPanel" class="comment">
+          @if (kidData.data.length != 0) {
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <span class="comment-info">
+                  <!-- <mat-icon style="cursor: pointer;">arrow_drop_up</mat-icon> -->
+                  <a (click)="goToUser(kidData?.data?.by)">{{kidData.data?.by +' '}}</a>
+                  <span>{{ kidData.data?.time}} | </span>
+                  @if (!last) {
+                    <span (click)="scrollToNext(kidsArrayData,i)" class="next"
+                    matTooltip="Go to next">next</span>
+                  }
+                  <span>
+                    @if (mep.expanded==true) {
+                      <span (click)="expandR()" class="minimize"
+                      matTooltip="minimize"></span>
+                    }
+                  [ - ] </span>
+                  @if (mep.expanded==false) {
+                    <span (click)="expandR()" class="minimize" matTooltip="expand">[
+                    + ]</span>
+                  }
+                </span>
+              </mat-panel-title>
             </mat-expansion-panel-header>
-            <div class="comment-body">
-                <div class="comment-text" [innerHTML]="kidData.data?.text"></div>
-                <!-- <div class="comment-reply">reply</div> -->
+          } @else {
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text"></div>
             </div>
-            <div *ngIf="kidData.data?.kids" class="sub-comments">
-                <app-comments [data]="kidData.data?.kids" [expand]="true"></app-comments>
+            <div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text"></div>
+              <div class="skeleton skeleton-text"></div>
             </div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+          }
+          <div class="comment-body">
+            <div class="comment-text" [innerHTML]="kidData.data?.text"></div>
+            <!-- <div class="comment-reply">reply</div> -->
+          </div>
+          @if (kidData.data?.kids) {
+            <div class="sub-comments">
+              <app-comments [data]="kidData.data?.kids" [expand]="true"></app-comments>
+            </div>
+          }
         </mat-expansion-panel>
-        <ng-template #nokidData>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-            </div>
-            <div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-                <div class="skeleton skeleton-text"></div>
-            </div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-            <div class="skeleton skeleton-text"></div>
-        </ng-template>
+      }
     </mat-accordion>
-</ng-template>
-<div *ngIf="!kidsArrayData;else data">
-    <div class="skeleton skeleton-text"></div>
-    <div class="skeleton skeleton-text"></div>
-    <div>
-        <div class="skeleton skeleton-text"></div>
-        <div class="skeleton skeleton-text"></div>
-    </div>
-    <div>
-        <div class="skeleton skeleton-text"></div>
-        <div class="skeleton skeleton-text"></div>
-    </div>
-</div>
+  }
+}
