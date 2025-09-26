@@ -2,7 +2,7 @@
 
 A modern Hacker News client built with Angular 20, featuring story lists, comments, and user profiles.
 
-## Description
+# Description
 
 This project is an Angular-based web application that provides a user-friendly interface to browse Hacker News stories, view comments, and explore user profiles. It utilizes the official Hacker News API to fetch and display content in real-time.
 
